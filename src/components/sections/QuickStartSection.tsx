@@ -55,10 +55,10 @@ ghdcbot --config config/config.yaml bot`;
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-2xl mb-10">
-          <p className="text-xs font-mono uppercase tracking-wider text-gitcord-muted mb-2">
+          <p className="text-xs font-mono uppercase tracking-wider text-gitcord-muted mb-2 font-medium">
             Deployment
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gitcord-heading mb-3">
             Quick start guide
           </h2>
           <p className="text-base text-gitcord-muted leading-relaxed">
@@ -67,17 +67,17 @@ ghdcbot --config config/config.yaml bot`;
         </div>
 
         {/* Tabbed Code Container */}
-        <div className="rounded-md border border-gitcord-border bg-gitcord-surface overflow-hidden">
+        <div className="rounded-lg border border-gitcord-border bg-gitcord-surface overflow-hidden shadow-clean-sm">
           {/* Tab Header */}
-          <div className="flex flex-wrap items-center justify-between border-b border-gitcord-border bg-gitcord-dark px-3 py-2">
+          <div className="flex flex-wrap items-center justify-between border-b border-gitcord-border bg-gitcord-surface px-3.5 py-2.5">
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setActiveTab('docker')}
-                className={`px-3 py-1.5 rounded text-xs font-mono transition-colors duration-150 ${
+                className={`px-3 py-1.5 rounded-md text-xs font-mono transition-colors duration-150 cursor-pointer ${
                   activeTab === 'docker'
-                    ? 'bg-gitcord-surface text-white border border-gitcord-border font-medium'
-                    : 'text-gitcord-muted hover:text-white'
+                    ? 'bg-gitcord-surface-elev text-gitcord-heading border border-gitcord-border font-medium shadow-clean-sm'
+                    : 'text-gitcord-muted hover:text-gitcord-heading'
                 }`}
               >
                 Docker Compose (Recommended)
@@ -85,10 +85,10 @@ ghdcbot --config config/config.yaml bot`;
               <button
                 type="button"
                 onClick={() => setActiveTab('python')}
-                className={`px-3 py-1.5 rounded text-xs font-mono transition-colors duration-150 ${
+                className={`px-3 py-1.5 rounded-md text-xs font-mono transition-colors duration-150 cursor-pointer ${
                   activeTab === 'python'
-                    ? 'bg-gitcord-surface text-white border border-gitcord-border font-medium'
-                    : 'text-gitcord-muted hover:text-white'
+                    ? 'bg-gitcord-surface-elev text-gitcord-heading border border-gitcord-border font-medium shadow-clean-sm'
+                    : 'text-gitcord-muted hover:text-gitcord-heading'
                 }`}
               >
                 Local Python (3.11+)
@@ -103,7 +103,7 @@ ghdcbot --config config/config.yaml bot`;
                   activeTab
                 )
               }
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-mono text-gitcord-muted hover:text-white hover:bg-gitcord-surface border border-transparent hover:border-gitcord-border transition-colors duration-150"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-mono text-gitcord-muted hover:text-gitcord-heading hover:bg-gitcord-surface-elev border border-transparent hover:border-gitcord-border transition-colors duration-150 cursor-pointer"
               aria-label="Copy commands to clipboard"
             >
               {copiedKey === activeTab ? (
@@ -121,16 +121,16 @@ ghdcbot --config config/config.yaml bot`;
           </div>
 
           {/* Terminal Code Body */}
-          <div className="p-4 sm:p-5 bg-gitcord-surface font-mono text-xs overflow-x-auto text-gitcord-text leading-relaxed">
+          <div className="p-4 sm:p-5 bg-gitcord-dark font-mono text-xs overflow-x-auto text-gitcord-text leading-relaxed">
             <pre tabIndex={0} className="focus:outline-none">
               <code>{activeTab === 'docker' ? dockerSnippet : pythonSnippet}</code>
             </pre>
           </div>
 
           {/* Footer Guide Links */}
-          <div className="p-4 bg-gitcord-dark border-t border-gitcord-border flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="p-4 bg-gitcord-surface border-t border-gitcord-border flex flex-wrap items-center justify-between gap-3 text-xs">
             <div className="flex items-center gap-2 text-gitcord-muted font-mono">
-              <Terminal className="w-4 h-4 text-gitcord-muted" aria-hidden="true" />
+              <Terminal className="w-4 h-4 text-gitcord-muted shrink-0" aria-hidden="true" />
               <span>
                 {activeTab === 'docker'
                   ? 'Persistent named volume gitcord_data survives container restarts.'
@@ -143,7 +143,7 @@ ghdcbot --config config/config.yaml bot`;
                 href={BRAND_CONFIG.urls.installation}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gitcord-text hover:text-white underline underline-offset-2 transition-colors inline-flex items-center gap-1"
+                className="text-gitcord-text hover:text-gitcord-heading underline underline-offset-2 transition-colors inline-flex items-center gap-1 font-medium"
               >
                 <span>INSTALLATION.md</span>
                 <ExternalLink className="w-3 h-3 text-gitcord-muted" aria-hidden="true" />
@@ -152,7 +152,7 @@ ghdcbot --config config/config.yaml bot`;
                 href={BRAND_CONFIG.urls.dockerGuide}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gitcord-text hover:text-white underline underline-offset-2 transition-colors inline-flex items-center gap-1"
+                className="text-gitcord-text hover:text-gitcord-heading underline underline-offset-2 transition-colors inline-flex items-center gap-1 font-medium"
               >
                 <span>docs/DOCKER.md</span>
                 <ExternalLink className="w-3 h-3 text-gitcord-muted" aria-hidden="true" />

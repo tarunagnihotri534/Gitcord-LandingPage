@@ -3,20 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --gitcord-blurple: #5865f2;
-  --gitcord-github-dark: #0d1117;
-  --gitcord-github-green: #238636;
-  --gitcord-surface: #161b22;
-  --gitcord-surface-elev: #21262d;
-  --gitcord-border: #30363d;
-  --gitcord-text: #f0f6fc;
-  --gitcord-muted: #8b949e;
-  --aossie-green: #228b22;
-  --aossie-gold: #ffc517;
+  --color-bg: #ffffff;
+  --color-surface: #f6f8fa;
+  --color-surface-elev: #ffffff;
+  --color-border: #d0d7de;
+  --color-border-muted: #eaeef2;
+  --color-text: #24292f;
+  --color-muted: #57606a;
+  --color-heading: #0f172a;
+  --color-green: #1a7f37;
+  --color-code-bg: #f6f8fa;
+  --color-nav-bg: rgba(255, 255, 255, 0.88);
+  --scrollbar-track: #f6f8fa;
+  --scrollbar-thumb: #d0d7de;
+}
+
+.dark {
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-surface-elev: #21262d;
+  --color-border: #30363d;
+  --color-border-muted: #21262d;
+  --color-text: #e6edf3;
+  --color-muted: #8b949e;
+  --color-heading: #f0f6fc;
+  --color-green: #238636;
+  --color-code-bg: #0d1117;
+  --color-nav-bg: rgba(13, 17, 23, 0.88);
+  --scrollbar-track: #0d1117;
+  --scrollbar-thumb: #30363d;
 }
 
 html {
-  color-scheme: dark;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 html.lenis,
@@ -40,18 +59,18 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* Custom subtle scrollbar */
+/* Subtle, theme-adaptive scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0d1117;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #30363d;
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 
