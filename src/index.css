@@ -35,7 +35,19 @@
 }
 
 html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Below-the-fold content visibility optimization to skip offscreen rendering */
+#how-it-works,
+#linking,
+#features,
+#quickstart {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
 }
 
 html.lenis,

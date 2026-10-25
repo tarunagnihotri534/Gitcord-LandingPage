@@ -5,9 +5,7 @@ import { useSmoothScroll } from '../../context/useSmoothScroll';
 import { DiscordIcon, GithubIcon } from '../common/Icons';
 import { Check, ExternalLink, HelpCircle, UserX, MessageSquare } from 'lucide-react';
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+
 
 interface StepItem {
   readonly id: string;
@@ -64,6 +62,8 @@ export const LinkingSection: React.FC = () => {
     if (isReducedMotion || typeof window === 'undefined' || !stepsColRef.current) {
       return;
     }
+
+    gsap.registerPlugin(ScrollTrigger);
 
     const stepElements = stepsColRef.current.querySelectorAll('.step-trigger');
     if (!stepElements.length) return;
@@ -161,13 +161,17 @@ export const LinkingSection: React.FC = () => {
                     <div className="ml-9 p-3 rounded-md bg-gitcord-dark border border-gitcord-border space-y-2">
                       <div className="flex items-center justify-between text-[11px]">
                         <span className="font-semibold text-gitcord-heading flex items-center gap-1.5">
-                          <img
-                            src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
-                            alt="Gitcord Bot"
-                            className="w-4 h-4 object-contain"
-                            width={16}
-                            height={16}
-                          />
+                          <picture>
+                            <source srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`} type="image/webp" />
+                            <img
+                              src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
+                              alt="Gitcord Bot"
+                              className="w-4 h-4 object-contain"
+                              width={16}
+                              height={16}
+                              loading="lazy"
+                            />
+                          </picture>
                           <span>Gitcord Bot</span>
                         </span>
                         <span className="text-[10px] text-gitcord-muted">Only you can see this (ephemeral)</span>

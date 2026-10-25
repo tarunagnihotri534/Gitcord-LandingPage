@@ -15,13 +15,17 @@ export const Footer: React.FC = () => {
           {/* Col 1: About */}
           <div className="space-y-3 md:col-span-1">
             <div className="flex items-center gap-2.5">
-              <img
-                src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
-                alt="Gitcord Logomark"
-                className="h-6 w-6 object-contain"
-                width={24}
-                height={24}
-              />
+              <picture>
+                <source srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`} type="image/webp" />
+                <img
+                  src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
+                  alt="Gitcord Logomark"
+                  className="h-6 w-6 object-contain"
+                  width={24}
+                  height={24}
+                  loading="lazy"
+                />
+              </picture>
               <span className="font-semibold text-gitcord-heading">Gitcord</span>
               <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gitcord-surface-elev border border-gitcord-border text-gitcord-muted">
                 v1.0
@@ -37,13 +41,17 @@ export const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-2.5 py-1.5 rounded-md border border-gitcord-border bg-gitcord-surface-elev hover:border-gitcord-muted transition-colors group"
               >
-                <img
-                  src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
-                  alt="AOSSIE Logo"
-                  className="h-6 w-6 object-contain"
-                  width={24}
-                  height={24}
-                />
+                <picture>
+                  <source srcSet={`${import.meta.env.BASE_URL}AOSSIE-Logo.webp`} type="image/webp" />
+                  <img
+                    src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
+                    alt="AOSSIE Logo"
+                    className="h-6 w-6 object-contain"
+                    width={24}
+                    height={24}
+                    loading="lazy"
+                  />
+                </picture>
                 <div className="text-[11px] leading-tight">
                   <span className="text-gitcord-muted block text-[10px]">Open source project by</span>
                   <span className="text-gitcord-heading font-medium group-hover:text-gitcord-blurple transition-colors">AOSSIE</span>
@@ -165,14 +173,18 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150 inline-flex items-center gap-1.5"
                 >
-                  <img
-                    src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
-                    alt=""
-                    className="h-4 w-4 object-contain inline-block"
-                    width={16}
-                    height={16}
-                    aria-hidden="true"
-                  />
+                  <picture>
+                    <source srcSet={`${import.meta.env.BASE_URL}AOSSIE-Logo.webp`} type="image/webp" />
+                    <img
+                      src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
+                      alt=""
+                      className="h-4 w-4 object-contain inline-block"
+                      width={16}
+                      height={16}
+                      loading="lazy"
+                      aria-hidden="true"
+                    />
+                  </picture>
                   <span>AOSSIE Organisation</span>
                   <ExternalLink className="w-2.5 h-2.5" aria-hidden="true" />
                 </a>

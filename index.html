@@ -2,10 +2,12 @@
 <html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="./GITCORD%20Logo.png" />
-    <link rel="icon" type="image/svg+xml" href="./brand/gitcord/favicon.svg" />
-    <link rel="apple-touch-icon" href="./GITCORD%20Logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" as="image" type="image/webp" href="./gitcord-logo.webp" />
     <script>
       (function() {
         try {
@@ -24,8 +26,8 @@
     </script>
     
     <!-- Primary Meta Tags -->
-    <title>Gitcord — Discord-GitHub Automation Engine | AOSSIE</title>
-    <meta name="title" content="Gitcord — Discord-GitHub Automation Engine | AOSSIE" />
+    <title>Gitcord-Landing Page</title>
+    <meta name="title" content="Gitcord-Landing Page" />
     <meta
       name="description"
       content="A local-first, offline-first automation engine that reads GitHub activity and Discord state, then plans role changes and GitHub assignments in a deterministic, reviewable way."
@@ -36,7 +38,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot" />
-    <meta property="og:title" content="Gitcord — Discord-GitHub Automation Engine | AOSSIE" />
+    <meta property="og:title" content="Gitcord-Landing Page" />
     <meta
       property="og:description"
       content="A local-first, offline-first automation engine that reads GitHub activity and Discord state, then plans role changes and GitHub assignments in a deterministic, reviewable way."
@@ -47,20 +49,33 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@aossie_org" />
     <meta name="twitter:creator" content="@aossie_org" />
-    <meta name="twitter:title" content="Gitcord — Discord-GitHub Automation Engine | AOSSIE" />
+    <meta name="twitter:title" content="Gitcord-Landing Page" />
     <meta
       name="twitter:description"
       content="A local-first, offline-first automation engine that reads GitHub activity and Discord state, then plans role changes and GitHub assignments in a deterministic, reviewable way."
     />
     <meta name="twitter:image" content="./brand/gitcord-og.png" />
 
-    <!-- Preconnect to Google Fonts for Inter -->
+    <!-- Preconnect & Asynchronous Non-Blocking Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      />
+    </noscript>
   </head>
   <body class="bg-gitcord-dark text-gitcord-text antialiased selection:bg-gitcord-blurple selection:text-white">
     <div id="root"></div>

@@ -22,13 +22,17 @@ export const Hero: React.FC = () => {
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-gitcord-surface border border-gitcord-border text-gitcord-text font-medium hover:border-gitcord-muted hover:text-gitcord-heading transition-colors"
                 title="AOSSIE — Australian Open Source Software Innovation and Education"
               >
-                <img
-                  src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
-                  alt="AOSSIE Logo"
-                  className="h-4 w-4 object-contain"
-                  width={16}
-                  height={16}
-                />
+                <picture>
+                  <source srcSet={`${import.meta.env.BASE_URL}AOSSIE-Logo.webp`} type="image/webp" />
+                  <img
+                    src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
+                    alt="AOSSIE Logo"
+                    className="h-4 w-4 object-contain"
+                    width={16}
+                    height={16}
+                    fetchPriority="high"
+                  />
+                </picture>
                 <span>{BRAND_CONFIG.org}</span>
               </a>
               <span className="text-gitcord-muted">/</span>
@@ -135,13 +139,16 @@ export const Hero: React.FC = () => {
                     <div className="w-full border-t border-gitcord-border" />
                   </div>
                   <div className="relative px-3 py-1 rounded bg-gitcord-surface-elev border border-gitcord-border text-[11px] font-mono text-gitcord-heading flex items-center gap-2 shadow-clean-sm">
-                    <img
-                      src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
-                      alt="Gitcord Engine"
-                      className="w-4 h-4 object-contain"
-                      width={16}
-                      height={16}
-                    />
+                    <picture>
+                      <source srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`} type="image/webp" />
+                      <img
+                        src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
+                        alt="Gitcord Engine"
+                        className="w-4 h-4 object-contain"
+                        width={16}
+                        height={16}
+                      />
+                    </picture>
                     <div className="flex items-center gap-1 text-[11px] text-gitcord-muted">
                       <span className="text-gitcord-heading font-medium">Read</span>
                       <ChevronRight className="w-3 h-3 text-gitcord-muted" aria-hidden="true" />

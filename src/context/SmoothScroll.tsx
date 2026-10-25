@@ -5,11 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SmoothScrollContext } from './smoothScrollContext';
 import type { ScrollToOptions } from './smoothScrollContext';
 
-// Register GSAP plugin safely
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 interface SmoothScrollProviderProps {
   children: React.ReactNode;
 }
@@ -44,15 +39,17 @@ export const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ chil
       };
     }
 
+    gsap.registerPlugin(ScrollTrigger);
+
     // Initialize Lenis
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      touchMultiplier: 1.2,
     });
 
     lenisRef.current = lenis;
@@ -63,13 +60,12 @@ export const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ chil
     };
     lenis.on('scroll', handleScroll);
 
-    // Ticker driving lenis.raf with lagSmoothing(0)
+    // Ticker driving lenis.raf with standard lagSmoothing to prevent frame-drop stutter
     const updateTicker = (time: number) => {
       lenis.raf(time * 1000);
     };
 
     gsap.ticker.add(updateTicker);
-    gsap.ticker.lagSmoothing(0);
 
     return () => {
       mediaQuery.removeEventListener('change', handleMediaChange);
@@ -77,7 +73,6 @@ export const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ chil
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
       lenisRef.current = null;
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
