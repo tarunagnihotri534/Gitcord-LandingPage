@@ -52,7 +52,8 @@ const SHOWCASE_ITEMS: readonly ShowcaseItem[] = [
     description:
       'When an issue, pull request, or review is submitted on GitHub, Gitcord posts an enriched embed directly to configured Discord channels. It automatically cross-references the GitHub author with their verified Discord account and pings their Discord handle (@mention) directly in the embed.',
     imageSrc: `${import.meta.env.BASE_URL}screenshots/activity-feed.png`,
-    imageAlt: 'Discord channel embed of GitHub Issue 167 showing automatic contributor Discord mention',
+    imageAlt:
+      'Discord channel embed of GitHub Issue 167 showing automatic contributor Discord mention',
     imageWidth: 889,
     imageHeight: 285,
     command: 'Issue #167: Created by @tarunagnihotri534 (@TARUN AGNIHO3III)',
@@ -75,7 +76,8 @@ const SHOWCASE_ITEMS: readonly ShowcaseItem[] = [
     description:
       'Never miss an assigned task in repository notifications or email spam. The moment a maintainer assigns an issue to a contributor on GitHub, Gitcord dispatches a dedicated notification in Discord highlighting the issue title, repository, assigning maintainer, and direct issue URL.',
     imageSrc: `${import.meta.env.BASE_URL}screenshots/issue-assignment.png`,
-    imageAlt: 'Gitcord Discord notification for Issue Assigned to You with repository details and link',
+    imageAlt:
+      'Gitcord Discord notification for Issue Assigned to You with repository details and link',
     imageWidth: 974,
     imageHeight: 399,
     command: '📌 Issue Assigned to You! #122 - [FEATURE]',
@@ -101,7 +103,11 @@ export const ShowcaseSection: React.FC = () => {
       : SHOWCASE_ITEMS.filter((item) => item.id === filterCategory);
 
   return (
-    <section id="showcase" className="py-20 border-b border-gitcord-border bg-gitcord-dark/40" aria-labelledby="showcase-heading">
+    <section
+      id="showcase"
+      className="py-20 border-b border-gitcord-border bg-gitcord-dark/40"
+      aria-labelledby="showcase-heading"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-2xl mb-12">
@@ -109,11 +115,15 @@ export const ShowcaseSection: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5 text-gitcord-blurple" aria-hidden="true" />
             <span>LIVE IN ACTION</span>
           </div>
-          <h2 id="showcase-heading" className="text-2xl sm:text-3xl font-bold tracking-tight text-gitcord-heading mb-3">
+          <h2
+            id="showcase-heading"
+            className="text-2xl sm:text-3xl font-bold tracking-tight text-gitcord-heading mb-3"
+          >
             Real-world Discord &amp; GitHub workflows
           </h2>
           <p className="text-base text-gitcord-muted leading-relaxed">
-            See how Gitcord operates inside live Discord servers. From zero-OAuth slash command linking to real-time issue assignments and cross-platform @mentions.
+            See how Gitcord operates inside live Discord servers. From zero-OAuth slash command
+            linking to real-time issue assignments and cross-platform @mentions.
           </p>
 
           {/* Quick Filter Tabs */}
@@ -159,13 +169,17 @@ export const ShowcaseSection: React.FC = () => {
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
                   {/* Screenshot Visual Column */}
-                  <div className={`p-4 sm:p-6 lg:col-span-7 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                  <div
+                    className={`p-4 sm:p-6 lg:col-span-7 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}
+                  >
                     <div className="rounded-lg border border-gitcord-border bg-[#18191c] overflow-hidden shadow-md group relative">
                       {/* Discord Mock Window Titlebar */}
                       <div className="flex items-center justify-between px-3 py-2 bg-[#202225] border-b border-gitcord-border/50 text-[11px] font-mono text-zinc-400">
                         <div className="flex items-center gap-2">
                           <DiscordIcon className="w-3.5 h-3.5 text-gitcord-blurple" />
-                          <span className="text-zinc-300 font-sans font-medium text-xs">Discord App Feed</span>
+                          <span className="text-zinc-300 font-sans font-medium text-xs">
+                            Discord App Feed
+                          </span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400">
@@ -216,7 +230,9 @@ export const ShowcaseSection: React.FC = () => {
                   </div>
 
                   {/* Content & Explanation Column */}
-                  <div className={`p-6 sm:p-8 lg:col-span-5 space-y-4 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
+                  <div
+                    className={`p-6 sm:p-8 lg:col-span-5 space-y-4 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
+                  >
                     {/* Badge & Category */}
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="font-mono text-xs px-2 py-0.5 rounded bg-gitcord-surface-elev border border-gitcord-border text-gitcord-blurple font-medium">

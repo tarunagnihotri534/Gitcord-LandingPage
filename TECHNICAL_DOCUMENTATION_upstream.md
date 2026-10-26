@@ -36,24 +36,28 @@ Gitcord solves the challenge of automating contributor recognition and task assi
 Gitcord is built on four foundational principles:
 
 #### **Offline-First Execution**
+
 - Runs locally on-demand; no daemon or server required
 - All processing happens in a single execution cycle (`run-once`)
 - No external dependencies beyond GitHub and Discord APIs
 - Suitable for cron jobs, manual runs, or CI/CD pipelines
 
 #### **Audit-First Workflow**
+
 - All planned changes are written to JSON and Markdown reports **before** any mutations
 - Reports are generated in `data_dir/reports/audit.json` and `audit.md`
 - Reviewers can inspect planned role changes, issue assignments, and scoring decisions
 - Mutations only occur in `active` mode with explicit write permissions
 
 #### **Deterministic Planning**
+
 - Identical inputs (same GitHub events, Discord state, config) produce identical plans
 - No randomness or time-dependent logic in planning
 - Enables reproducible testing and debugging
 - Plans are pure functions of input data
 
 #### **Permission-Aware IO**
+
 - Readers degrade gracefully when API permissions are missing
 - Writers check `MutationPolicy` before executing any changes
 - Failed reads don't crash the system; they produce partial results
@@ -86,11 +90,11 @@ The default operating style is safe by design. In `dry-run` and `observer` modes
 
 Gitcord uses `RunMode` and `MutationPolicy` from `src/ghdcbot/core/modes.py` to decide whether actions may be applied.
 
-| Mode | What Gitcord Does |
-| --- | --- |
-| `dry-run` | Reads data, computes plans, writes audit reports, skips mutations. |
-| `observer` | Read-only observation mode, also skips mutations. |
-| `active` | Applies GitHub and Discord changes when write permissions are enabled. |
+| Mode       | What Gitcord Does                                                      |
+| ---------- | ---------------------------------------------------------------------- |
+| `dry-run`  | Reads data, computes plans, writes audit reports, skips mutations.     |
+| `observer` | Read-only observation mode, also skips mutations.                      |
+| `active`   | Applies GitHub and Discord changes when write permissions are enabled. |
 
 This means a maintainer can test the complete workflow safely before allowing the bot to mutate GitHub or Discord.
 
@@ -118,24 +122,26 @@ The current codebase provides these major Gitcord features:
 ### 1.6 Notification Types (GitHub → Discord)
 
 Gitcord supports **9 notification types** that cover the full GitHub contribution lifecycle. All notifications are:
+
 - **Verified-only:** Sent only to users who have verified their Discord-GitHub identity
 - **Configurable:** Each type can be enabled/disabled via `NotificationConfig` (`pr_review_result` covers both PR Approved and Changes Requested)
 - **Deduplicated:** Prevents duplicate notifications for the same event using deduplication keys
 - **Recipient-aware:** Each event type routes to the appropriate GitHub user (assignee, author, or reviewer)
 
-| Notification Type | Config Flag | Trigger | Recipient | Message | Dedup Key |
-|---|---|---|---|---|---|
-| **Issue Assigned** | `issue_assignment` | Issue assigned to a user | Assignee | 📋 Assigned to you: `[title]` | `issue_assigned:{repo}:{issue_number}:{user}` |
-| **PR Review Requested** | `pr_review_requested` | Reviewer requested on PR | Reviewer | 👀 Review requested: `[title]` | `pr_review_requested:{repo}:{pr_number}:{user}:{reviewer_id}` |
-| **PR Approved** | `pr_review_result` | PR review approved | PR Author | ✅ Approved: `[title]` | `pr_reviewed:{repo}:{pr_number}:{user}:{review_id}:APPROVED` |
-| **Changes Requested** | `pr_review_result` | Changes requested on PR | PR Author | 🔁 Changes requested: `[title]` | `pr_reviewed:{repo}:{pr_number}:{user}:{review_id}:CHANGES_REQUESTED` |
-| **Review Comment** | `pr_review_comment` | Comment posted on PR review | PR Author | 💬 Review comment: `[title]` | `pr_reviewed:{repo}:{pr_number}:{user}:{review_id}:COMMENT` |
-| **PR Merged** | `pr_merged` | PR merged to main | PR Author | 🎉 Merged: `[title]` | `pr_merged:{repo}:{pr_number}:{user}` |
-| **PR Closed** | `pr_closed` | PR closed without merge | PR Author | 🚫 Closed: `[title]` | `pr_closed:{repo}:{pr_number}:{user}:{closed_at}` |
-| **Issue Reopened** | `issue_reopened` | Issue reopened | Current Assignee | 📌 Reopened: `[title]` | `issue_reopened:{repo}:{issue_number}:{user}:{reopened_at}` |
-| **PR Reopened** | `pr_reopened` | PR reopened | PR Author | 🔄 Reopened: `[title]` | `pr_reopened:{repo}:{pr_number}:{user}:{reopened_at}` |
+| Notification Type       | Config Flag           | Trigger                     | Recipient        | Message                         | Dedup Key                                                             |
+| ----------------------- | --------------------- | --------------------------- | ---------------- | ------------------------------- | --------------------------------------------------------------------- |
+| **Issue Assigned**      | `issue_assignment`    | Issue assigned to a user    | Assignee         | 📋 Assigned to you: `[title]`   | `issue_assigned:{repo}:{issue_number}:{user}`                         |
+| **PR Review Requested** | `pr_review_requested` | Reviewer requested on PR    | Reviewer         | 👀 Review requested: `[title]`  | `pr_review_requested:{repo}:{pr_number}:{user}:{reviewer_id}`         |
+| **PR Approved**         | `pr_review_result`    | PR review approved          | PR Author        | ✅ Approved: `[title]`          | `pr_reviewed:{repo}:{pr_number}:{user}:{review_id}:APPROVED`          |
+| **Changes Requested**   | `pr_review_result`    | Changes requested on PR     | PR Author        | 🔁 Changes requested: `[title]` | `pr_reviewed:{repo}:{pr_number}:{user}:{review_id}:CHANGES_REQUESTED` |
+| **Review Comment**      | `pr_review_comment`   | Comment posted on PR review | PR Author        | 💬 Review comment: `[title]`    | `pr_reviewed:{repo}:{pr_number}:{user}:{review_id}:COMMENT`           |
+| **PR Merged**           | `pr_merged`           | PR merged to main           | PR Author        | 🎉 Merged: `[title]`            | `pr_merged:{repo}:{pr_number}:{user}`                                 |
+| **PR Closed**           | `pr_closed`           | PR closed without merge     | PR Author        | 🚫 Closed: `[title]`            | `pr_closed:{repo}:{pr_number}:{user}:{closed_at}`                     |
+| **Issue Reopened**      | `issue_reopened`      | Issue reopened              | Current Assignee | 📌 Reopened: `[title]`          | `issue_reopened:{repo}:{issue_number}:{user}:{reopened_at}`           |
+| **PR Reopened**         | `pr_reopened`         | PR reopened                 | PR Author        | 🔄 Reopened: `[title]`          | `pr_reopened:{repo}:{pr_number}:{user}:{reopened_at}`                 |
 
 **Delivery Method:**
+
 - Default: DM to verified Discord user
 - Fallback: Send to configured `channel_id` if DM fails and channel is specified
 
@@ -144,30 +150,30 @@ Gitcord supports **9 notification types** that cover the full GitHub contributio
 ```yaml
 discord:
   notifications:
-    enabled: true                    # Master switch for all notifications
-    issue_assignment: true           # When issue is assigned
-    pr_review_requested: true        # When reviewer is requested
-    pr_review_result: true           # When review is approved or changes requested
-    pr_review_comment: true          # When comment posted on review
-    pr_merged: true                  # When PR is merged
-    pr_closed: true                  # When PR is closed without merge
-    issue_reopened: true             # When issue is reopened
-    pr_reopened: true                # When PR is reopened
-    channel_id: null                 # Optional fallback channel for notifications
+    enabled: true # Master switch for all notifications
+    issue_assignment: true # When issue is assigned
+    pr_review_requested: true # When reviewer is requested
+    pr_review_result: true # When review is approved or changes requested
+    pr_review_comment: true # When comment posted on review
+    pr_merged: true # When PR is merged
+    pr_closed: true # When PR is closed without merge
+    issue_reopened: true # When issue is reopened
+    pr_reopened: true # When PR is reopened
+    channel_id: null # Optional fallback channel for notifications
 ```
 
 ### 1.6.1 PR Channel Status Timeline (optional)
 
 With `notifications.pr_channel_timeline: true` (default `false`), each tracked PR channel post (from `pr_opened`) shows a status dot and a newest-first timeline, and is edited in place as the PR moves. It replaces the merge/close/reopen edit from `update_pr_channel_on_lifecycle`; it never posts new messages or sends DMs (review DMs are unchanged).
 
-| Dot | Status | When |
-| --- | --- | --- |
-| 🔴 | Closed | PR closed without merge |
-| 🔵 | Merged | PR merged |
-| 🟢 | Approved | Latest review is an approval |
-| 🟠 | Not approved | Latest review requested changes or only commented |
-| 🟡 | Revised | New commits (or a force-push / merge of main) after the latest review |
-| ⚪ | Created | No reviews yet |
+| Dot | Status       | When                                                                  |
+| --- | ------------ | --------------------------------------------------------------------- |
+| 🔴  | Closed       | PR closed without merge                                               |
+| 🔵  | Merged       | PR merged                                                             |
+| 🟢  | Approved     | Latest review is an approval                                          |
+| 🟠  | Not approved | Latest review requested changes or only commented                     |
+| 🟡  | Revised      | New commits (or a force-push / merge of main) after the latest review |
+| ⚪  | Created      | No reviews yet                                                        |
 
 Rules: anyone's review counts (people and bots alike, no role assumptions); the author's own replies, pending reviews and dismissed reviews do not change the colour; commits from bot accounts and commits before the first review are not shown as revisions. Drafts keep their colour and get a `· Draft` label. Dates use Discord timestamps (each reader's local time); repeated steps collapse to `(×N)` and long histories show the 6 newest lines plus `Created`.
 
@@ -181,22 +187,23 @@ ghdcbot --config config/config.yaml preview-pr-timeline --repo Gitcord-GithubDis
 
 ### 1.7 Main Code Areas
 
-| Area | Files | Responsibility |
-| --- | --- | --- |
-| CLI | `src/ghdcbot/cli.py`, `src/ghdcbot/__main__.py` | Command-line entry points and command routing. |
-| Config | `src/ghdcbot/config/loader.py`, `src/ghdcbot/config/models.py` | YAML loading, env expansion, Pydantic validation. |
-| Core models | `src/ghdcbot/core/models.py`, `src/ghdcbot/core/interfaces.py`, `src/ghdcbot/core/modes.py` | Shared dataclasses, protocols, and mutation policy. |
-| GitHub adapter | `src/ghdcbot/adapters/github/rest.py` | GitHub ingestion, assignments, review requests. |
-| Discord adapter | `src/ghdcbot/adapters/discord/api.py` | Discord role reads/writes, DMs, channel messages. |
-| Storage | `src/ghdcbot/adapters/storage/sqlite.py` | SQLite schema and persistence methods. |
-| Orchestration | `src/ghdcbot/engine/orchestrator.py` | Main sync pipeline. |
-| Scoring | `src/ghdcbot/engine/scoring.py` | Weighted contributor scoring. |
-| Planning | `src/ghdcbot/engine/planning.py`, `src/ghdcbot/engine/assignment.py` | Role plans, assignment plans, review plans. |
-| Discord bot | `src/ghdcbot/bot.py` | Slash commands and Discord UI workflows. |
-| Identity | `src/ghdcbot/engine/identity_linking.py`, `src/ghdcbot/adapters/github/identity.py` | GitHub account verification. |
-| Reports | `src/ghdcbot/engine/reporting.py`, `src/ghdcbot/engine/audit_export.py` | Audit report rendering and export. |
-| Notifications | `src/ghdcbot/engine/notifications.py` | GitHub-to-Discord notification logic. |
-| PR timeline | `src/ghdcbot/engine/pr_timeline.py`, `src/ghdcbot/engine/pr_timeline_refresh.py` | PR status/timeline rules and the per-sync PR channel post refresh. |
+| Area            | Files                                                                                       | Responsibility                                                     |
+| --------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| CLI             | `src/ghdcbot/cli.py`, `src/ghdcbot/__main__.py`                                             | Command-line entry points and command routing.                     |
+| Config          | `src/ghdcbot/config/loader.py`, `src/ghdcbot/config/models.py`                              | YAML loading, env expansion, Pydantic validation.                  |
+| Core models     | `src/ghdcbot/core/models.py`, `src/ghdcbot/core/interfaces.py`, `src/ghdcbot/core/modes.py` | Shared dataclasses, protocols, and mutation policy.                |
+| GitHub adapter  | `src/ghdcbot/adapters/github/rest.py`                                                       | GitHub ingestion, assignments, review requests.                    |
+| Discord adapter | `src/ghdcbot/adapters/discord/api.py`                                                       | Discord role reads/writes, DMs, channel messages.                  |
+| Storage         | `src/ghdcbot/adapters/storage/sqlite.py`                                                    | SQLite schema and persistence methods.                             |
+| Orchestration   | `src/ghdcbot/engine/orchestrator.py`                                                        | Main sync pipeline.                                                |
+| Scoring         | `src/ghdcbot/engine/scoring.py`                                                             | Weighted contributor scoring.                                      |
+| Planning        | `src/ghdcbot/engine/planning.py`, `src/ghdcbot/engine/assignment.py`                        | Role plans, assignment plans, review plans.                        |
+| Discord bot     | `src/ghdcbot/bot.py`                                                                        | Slash commands and Discord UI workflows.                           |
+| Identity        | `src/ghdcbot/engine/identity_linking.py`, `src/ghdcbot/adapters/github/identity.py`         | GitHub account verification.                                       |
+| Reports         | `src/ghdcbot/engine/reporting.py`, `src/ghdcbot/engine/audit_export.py`                     | Audit report rendering and export.                                 |
+| Notifications   | `src/ghdcbot/engine/notifications.py`                                                       | GitHub-to-Discord notification logic.                              |
+| PR timeline     | `src/ghdcbot/engine/pr_timeline.py`, `src/ghdcbot/engine/pr_timeline_refresh.py`            | PR status/timeline rules and the per-sync PR channel post refresh. |
+
 ---
 
 ## 2. Architecture
@@ -235,12 +242,14 @@ ghdcbot --config config/config.yaml preview-pr-timeline --repo Gitcord-GithubDis
 ### 2.2 Main Components
 
 #### **CLI (`src/ghdcbot/cli.py`)**
+
 - Entry point for `run-once`, `bot`, `link`, `verify-link`, `identity`, `export-audit`
 - Parses command-line arguments and YAML config
 - Builds adapters via plugin registry
 - Constructs `Orchestrator` and executes commands
 
 #### **Discord Bot (`src/ghdcbot/bot.py`)**
+
 - Long-running Discord bot with slash commands
 - Handles identity linking (`/link`, `/verify-link`, `/unlink`)
 - Shows contributor profiles (`/profile` — GitHub, verification, socials, roles)
@@ -251,23 +260,27 @@ ghdcbot --config config/config.yaml preview-pr-timeline --repo Gitcord-GithubDis
 - Mentor-only repo → channel routing (`/pr-channel set|remove|list`): routes stored in SQLite (`repo_channel_routes`) and layered on top of `discord.pr_open_channels` / `github.repos` by `engine/channel_routes.py` at bot startup, after each change, and at the start of every `run-once`
 
 #### **Orchestrator (`src/ghdcbot/engine/orchestrator.py`)**
+
 - Core execution engine for `run-once` cycle
 - Coordinates: ingestion → scoring → planning → reporting → mutation
 - Manages notification sending (verified-only)
 
 #### **Storage (`src/ghdcbot/adapters/storage/sqlite.py`)**
+
 - SQLite database for local state (`state.db`)
 - Tables: `contributions`, `scores`, `cursors`, `identity_links`, `issue_requests`, `notifications_sent`
 - Append-only audit log (`audit_events.jsonl`)
 - Schema migrations via additive `ALTER TABLE` (backward compatible)
 
 #### **GitHub Adapter (`src/ghdcbot/adapters/github/rest.py`)**
+
 - Reads: contributions, issues, PRs via REST API
 - Writes: issue assignments, review requests (never commits files to repos)
 - Handles pagination, rate limiting, error recovery
 - Filters repos based on config (`repos.mode`, `repos.names`)
 
 #### **Discord Adapter (`src/ghdcbot/adapters/discord/api.py`)**
+
 - Reads: guild members, roles via REST API
 - Writes: role additions/removals, DMs, channel messages
 - Handles permission degradation gracefully
@@ -325,6 +338,7 @@ ghdcbot --config config/config.yaml preview-pr-timeline --repo Gitcord-GithubDis
 Discord bot commands interact with the system as follows:
 
 **Identity Linking Flow:**
+
 ```
 User: /link github_username
   └─> IdentityLinkService.create_claim()
@@ -362,6 +376,7 @@ User: /open-prs contributor
 ```
 
 **Sync Command:**
+
 ```
 Mentor: /sync
   └─> Build Orchestrator (same as run-once)
@@ -377,6 +392,7 @@ Mentor: /sync
 ### 3.1 SQLite Tables
 
 #### **`contributions`**
+
 Stores raw GitHub contribution events.
 
 ```sql
@@ -395,6 +411,7 @@ CREATE TABLE contributions (
 **Indexes:** None (queries filter by `created_at` range).
 
 #### **`scores`**
+
 Stores computed contribution scores per user per period.
 
 ```sql
@@ -411,6 +428,7 @@ CREATE TABLE scores (
 **Purpose:** Cached scores for role planning. Period boundaries match config `scoring.period_days`.
 
 #### **`cursors`**
+
 Tracks last-seen timestamp per data source.
 
 ```sql
@@ -423,6 +441,7 @@ CREATE TABLE cursors (
 **Purpose:** Incremental ingestion. Prevents re-processing old events.
 
 #### **`identity_links`**
+
 Stores Discord ↔ GitHub identity mappings.
 
 ```sql
@@ -442,10 +461,12 @@ CREATE TABLE identity_links (
 **Purpose:** Identity verification system. One verified mapping per Discord user. Supports stale refresh.
 
 **Indexes:**
+
 - `idx_identity_links_github_user` (for reverse lookup)
 - `idx_identity_links_verified` (for filtering verified)
 
 #### **`issue_requests`**
+
 Stores contributor issue assignment requests.
 
 ```sql
@@ -465,10 +486,12 @@ CREATE TABLE issue_requests (
 **Purpose:** Issue request workflow. Mentors review and approve/reject.
 
 **Indexes:**
+
 - `idx_issue_requests_status` (for filtering pending)
 - `idx_issue_requests_created` (for sorting)
 
 #### **`notifications_sent`**
+
 Deduplication table for notifications.
 
 ```sql
@@ -487,6 +510,7 @@ CREATE TABLE notifications_sent (
 **Purpose:** Prevents duplicate notifications for same event.
 
 **Indexes:**
+
 - `idx_notifications_sent_github_user`
 - `idx_notifications_sent_discord_user`
 
@@ -505,6 +529,7 @@ All persisted data now stays local in `data_dir`: SQLite (`state.db`, applicatio
 **Purpose:** Verify Discord users own their claimed GitHub accounts without OAuth.
 
 **Flow:**
+
 1. User runs `/link github_username` in Discord
 2. Bot generates 10-character verification code (alphanumeric)
 3. Code expires in 10 minutes (configurable via `ttl_minutes`)
@@ -515,6 +540,7 @@ All persisted data now stays local in `data_dir`: SQLite (`state.db`, applicatio
 8. If code not found → return error, user can retry
 
 **Security:**
+
 - Impersonation protection: one GitHub user can only be verified by one Discord user
 - Expired claims are cleaned up automatically
 - Stale verification detection (configurable `identity.verified_max_age_days`)
@@ -523,6 +549,7 @@ All persisted data now stays local in `data_dir`: SQLite (`state.db`, applicatio
 **Storage:** `identity_links` table in SQLite
 
 **Commands:**
+
 - `/link` - Create claim
 - `/verify-link` - Verify claim (GitHub bio/gist check; offloaded to thread)
 - `/profile` - Show GitHub, verification, socials, and roles (self or another member)
@@ -537,25 +564,30 @@ All persisted data now stays local in `data_dir`: SQLite (`state.db`, applicatio
 **Purpose:** Send Discord notifications for GitHub events, but only to verified users.
 
 **Event Types:**
+
 - `issue_assigned` - User assigned to issue
 - `pr_review_requested` - User requested as reviewer
 - `pr_review_result` - PR review approved/changes requested (notifies PR author)
 - `pr_merged` - User's PR merged
 
 **Verification Requirement:**
+
 - User must have verified Discord ↔ GitHub link
 - Unverified users receive no notifications (anti-spam)
 
 **Deduplication:**
+
 - Uses `notifications_sent` table
 - Dedupe key: `event_type + github_user + repo + target`
 - Prevents duplicate notifications for same event
 
 **Delivery:**
+
 - DM (default): `channel_id = null`
 - Channel posting: `channel_id` configured in `discord.notifications.channel_id`
 
 **Configuration:**
+
 ```yaml
 discord:
   notifications:
@@ -564,12 +596,13 @@ discord:
     pr_review_requested: true
     pr_review_result: true
     pr_merged: true
-    channel_id: null  # null = DM, or set channel ID
+    channel_id: null # null = DM, or set channel ID
 ```
 
 ### 4.3 Contributor Profiles & Social Links
 
 **`/profile`** shows for a Discord member (or self):
+
 - GitHub username and verification status (verified, stale, pending, not linked)
 - Linked social profiles (X, LinkedIn)
 - Discord roles
@@ -583,6 +616,7 @@ discord:
 When `discord.pr_preview_channels` is configured, the bot monitors those channels. When a PR URL is detected in a message, it auto-fetches and posts an embed preview. No slash command is required.
 
 **PR Context Includes:**
+
 - Repository, PR number, title, state (open/closed/merged)
 - Author (with Discord mention if linked)
 - Review status (approved/changes_requested/pending)
@@ -595,23 +629,27 @@ When `discord.pr_preview_channels` is configured, the bot monitors those channel
 **Two Rule Types:**
 
 #### **Score-Based Roles**
+
 - Roles assigned based on contribution score thresholds
 - Config: `role_mappings` (list of `discord_role` + `min_score`)
 - Example: `Contributor` role at 10 points, `Maintainer` at 40 points
 - Scoring period: `scoring.period_days` (default: 30 days)
 
 #### **Merge-Based Roles**
+
 - Roles assigned based on merged PR count
 - Config: `merge_role_rules` (list of `discord_role` + `min_merged_prs`)
 - Example: `apprentice` at 1 merged PR, `testing_role` at 2 merged PRs
 - Only highest eligible role is assigned (deterministic)
 
 **Role Removal:**
+
 - Score-based roles removed if score drops below threshold
 - Merge-based roles persist (never removed automatically)
 - Final desired roles = `max(score_based, merge_based)`
 
 **Congratulatory Messages:**
+
 - When role is added → Bot sends DM congratulating user
 - Only in active mode (mutations allowed)
 - Fails gracefully if DMs disabled
@@ -627,6 +665,7 @@ The `issue_requests` SQLite table remains for historical data. Discord slash com
 **Storage:** `data_dir/audit_events.jsonl` (JSON Lines format)
 
 **Event Types:**
+
 - `identity_claim_created`
 - `identity_verified`
 - `identity_unlinked`
@@ -638,6 +677,7 @@ The `issue_requests` SQLite table remains for historical data. Discord slash com
 - `snapshot_written` (older logs only; snapshots were removed)
 
 **Format:**
+
 ```json
 {
   "event_type": "identity_verified",
@@ -652,6 +692,7 @@ The `issue_requests` SQLite table remains for historical data. Discord slash com
 ```
 
 **Export:**
+
 - CLI: `ghdcbot --config config.yaml export-audit --format json|csv|md`
 - Filters: `--user`, `--event-type`, `--from`, `--to`
 
@@ -664,23 +705,25 @@ The `issue_requests` SQLite table remains for historical data. Discord slash com
 **Purpose:** Gate all mutations (Discord roles, GitHub assignments) behind explicit policy.
 
 **Structure:**
+
 ```python
 @dataclass(frozen=True)
 class MutationPolicy:
     mode: RunMode  # DRY_RUN, OBSERVER, ACTIVE
     github_write_allowed: bool
     discord_write_allowed: bool
-    
+
     @property
     def allow_github_mutations(self) -> bool:
         return mode == ACTIVE and github_write_allowed
-    
+
     @property
     def allow_discord_mutations(self) -> bool:
         return mode == ACTIVE and discord_write_allowed
 ```
 
 **Usage:**
+
 - All writers check `policy.allow_*_mutations` before executing
 - Plans are always generated (for reports)
 - Mutations only applied if policy allows
@@ -688,6 +731,7 @@ class MutationPolicy:
 ### 5.2 Run Modes
 
 #### **DRY_RUN (Default)**
+
 - Reads GitHub and Discord state
 - Computes scores and plans
 - Generates audit reports
@@ -695,16 +739,18 @@ class MutationPolicy:
 - Safe for testing and review
 
 #### **OBSERVER**
+
 - Same as DRY_RUN
 - Intended for read-only tokens
 - Produces reports without write permissions
 
 #### **ACTIVE**
+
 - Full execution: reads, plans, **and applies mutations**
 - Requires explicit config:
   ```yaml
   runtime:
-    mode: "active"
+    mode: 'active'
   github:
     permissions:
       write: true
@@ -716,15 +762,18 @@ class MutationPolicy:
 ### 5.3 Deduplication
 
 **Plans:**
+
 - Dedupe key: `(repo, target_type, target_number, action, assignee)`
 - Prevents duplicate assignments in same run
 
 **Notifications:**
+
 - Dedupe key: `event_type + github_user + repo + target`
 - Stored in `notifications_sent` table
 - Prevents duplicate notifications for same event
 
 **Identity Claims:**
+
 - One verified mapping per Discord user
 - One verified mapping per GitHub user
 - Pending claims expire after 10 minutes
@@ -732,14 +781,17 @@ class MutationPolicy:
 ### 5.4 Verified-Only Behavior
 
 **Notifications:**
+
 - Only sent to users with verified Discord ↔ GitHub link
 - Unverified users receive no notifications (anti-spam)
 
 **Issue Requests:**
+
 - Contributors must be verified to request assignment
 - Mentors can assign to any Discord user (they resolve to GitHub)
 
 **Scoring:**
+
 - Scores computed for all GitHub users (not just verified)
 - But role assignment only applies to verified Discord users
 
@@ -750,6 +802,7 @@ class MutationPolicy:
 ### 6.1 Event Ingestion
 
 **APIs Used:**
+
 - `GET /orgs/{org}/repos` - List organization repositories
 - `GET /repos/{owner}/{repo}/issues` - List open issues
 - `GET /repos/{owner}/{repo}/pulls` - List open pull requests
@@ -758,6 +811,7 @@ class MutationPolicy:
 - `GET /repos/{owner}/{repo}/commits` - Commit history (for PR context)
 
 **Event Types Ingested:**
+
 - `issue_opened` - New issue created (ingested for reports, not scored)
 - `issue_assigned` - Issue assigned to user (triggers notification)
 - `pr_opened` - New PR created (ingested for reports, not scored)
@@ -771,11 +825,13 @@ class MutationPolicy:
 **Note on Scoring:** Gitcord uses merge-only scoring. Only `pr_merged` events contribute to contributor scores. Other events (issue_opened, pr_opened, comment) are ingested for audit trails and activity reports but do not affect scoring. This prevents spam and gaming while keeping the system simple and mentor-approved.
 
 **Incremental Ingestion:**
+
 - Uses `cursors` table to track last-seen timestamp
 - Only fetches events since cursor
 - Prevents re-processing old events
 
 **Repo Filtering:**
+
 - Config: `repos.mode` (`allow` or `deny`)
 - Config: `repos.names` (list of repo names)
 - Applied before ingestion

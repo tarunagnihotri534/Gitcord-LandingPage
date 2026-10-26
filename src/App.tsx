@@ -33,19 +33,54 @@ export default function App(): React.JSX.Element {
 
           <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
             <Hero />
-            <Suspense fallback={<div className="py-16 min-h-[350px] border-b border-gitcord-border" aria-hidden="true" />}>
+            <Suspense
+              fallback={
+                <div
+                  className="py-16 min-h-[350px] border-b border-gitcord-border"
+                  aria-hidden="true"
+                />
+              }
+            >
               <PipelineSection />
             </Suspense>
-            <Suspense fallback={<div className="py-16 min-h-[500px] border-b border-gitcord-border" aria-hidden="true" />}>
+            <Suspense
+              fallback={
+                <div
+                  className="py-16 min-h-[500px] border-b border-gitcord-border"
+                  aria-hidden="true"
+                />
+              }
+            >
               <LinkingSection />
             </Suspense>
-            <Suspense fallback={<div className="py-20 min-h-[500px] border-b border-gitcord-border" aria-hidden="true" />}>
+            <Suspense
+              fallback={
+                <div
+                  className="py-20 min-h-[500px] border-b border-gitcord-border"
+                  aria-hidden="true"
+                />
+              }
+            >
               <ShowcaseSection />
             </Suspense>
-            <Suspense fallback={<div className="py-16 min-h-[400px] border-b border-gitcord-border" aria-hidden="true" />}>
+            <Suspense
+              fallback={
+                <div
+                  className="py-16 min-h-[400px] border-b border-gitcord-border"
+                  aria-hidden="true"
+                />
+              }
+            >
               <FeaturesSection />
             </Suspense>
-            <Suspense fallback={<div className="py-16 min-h-[400px] border-b border-gitcord-border" aria-hidden="true" />}>
+            <Suspense
+              fallback={
+                <div
+                  className="py-16 min-h-[400px] border-b border-gitcord-border"
+                  aria-hidden="true"
+                />
+              }
+            >
               <QuickStartSection />
             </Suspense>
           </main>

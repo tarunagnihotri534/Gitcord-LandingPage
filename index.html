@@ -9,10 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preload" as="image" type="image/webp" href="./gitcord-logo.webp" />
     <script>
-      (function() {
+      (function () {
         try {
           var t = localStorage.getItem('gitcord-theme');
-          if (t === 'light' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          if (
+            t === 'light' ||
+            (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+          ) {
             document.documentElement.classList.remove('dark');
             document.documentElement.classList.add('light');
             document.documentElement.style.colorScheme = 'light';
@@ -24,7 +27,7 @@
         } catch (e) {}
       })();
     </script>
-    
+
     <!-- Primary Meta Tags -->
     <title>Gitcord-Landing Page</title>
     <meta name="title" content="Gitcord-Landing Page" />
@@ -32,7 +35,10 @@
       name="description"
       content="A local-first, offline-first automation engine that reads GitHub activity and Discord state, then plans role changes and GitHub assignments in a deterministic, reviewable way."
     />
-    <meta name="keywords" content="Gitcord, AOSSIE, Discord GitHub Bot, GitHub Automation, Discord Automation, Open Source, GSoC 2026, Role Automation, Contributor Metrics" />
+    <meta
+      name="keywords"
+      content="Gitcord, AOSSIE, Discord GitHub Bot, GitHub Automation, Discord Automation, Open Source, GSoC 2026, Role Automation, Contributor Metrics"
+    />
     <meta name="author" content="AOSSIE" />
 
     <!-- Open Graph / Facebook -->
@@ -68,7 +74,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       media="print"
-      onload="this.media='all'"
+      onload="this.media = 'all'"
     />
     <noscript>
       <link
@@ -77,7 +83,9 @@
       />
     </noscript>
   </head>
-  <body class="bg-gitcord-dark text-gitcord-text antialiased selection:bg-gitcord-blurple selection:text-white">
+  <body
+    class="bg-gitcord-dark text-gitcord-text antialiased selection:bg-gitcord-blurple selection:text-white"
+  >
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

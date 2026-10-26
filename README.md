@@ -5,16 +5,16 @@
     <img alt="Gitcord" src="public/brand/gitcord/gitcord.svg" width="160" />
   </div>
 
-  # Gitcord Landing Page
+# Gitcord Landing Page
 
-  A calm, documentation-style landing page for [Gitcord](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot) (Discord-GitHub Automation Engine by AOSSIE).
+A calm, documentation-style landing page for [Gitcord](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot) (Discord-GitHub Automation Engine by AOSSIE).
 
-  [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
-  [![React](https://img.shields.io/badge/React-19.3.1-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-  [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.19-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-  [![GSAP](https://img.shields.io/badge/GSAP-3.15.0-88CE02?style=flat-square&logo=greensock&logoColor=white)](https://gsap.com/)
-  [![Lenis](https://img.shields.io/badge/Lenis-1.3.27-black?style=flat-square)](https://lenis.darkroom.engineering/)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
+[![React](https://img.shields.io/badge/React-19.3.1-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.19-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![GSAP](https://img.shields.io/badge/GSAP-3.15.0-88CE02?style=flat-square&logo=greensock&logoColor=white)](https://gsap.com/)
+[![Lenis](https://img.shields.io/badge/Lenis-1.3.27-black?style=flat-square)](https://lenis.darkroom.engineering/)
 
 </div>
 
@@ -25,6 +25,7 @@
 This repository contains the marketing and documentation landing page for **Gitcord**, an open-source, local-first automation engine developed by **AOSSIE**.
 
 ### Who This Site Is For
+
 - **Contributors:** Step-by-step guidance on linking GitHub accounts (`/link`, `/verify-link`), checking profile status, and tracking PR health without leaving Discord.
 - **Mentors & Maintainers:** Information on dry-run safety, deterministic planning, `/pr-channel` routing, scheduled sync via Docker, and permission boundaries.
 
@@ -32,17 +33,17 @@ This repository contains the marketing and documentation landing page for **Gitc
 
 ## Section Status (MVP & Future Additions)
 
-| Section | Target Anchor | Description | Status |
-| :--- | :--- | :--- | :--- |
-| **01 Navbar** | Top | Sticky 56px solid header, logo, anchor navigation, GitHub link, mobile drawer | **Completed (MVP)** |
-| **02 Hero** | `#hero` | Asymmetrical 7:5 split: headline, facts, action buttons, flat architecture mockup | **Completed (MVP)** |
-| **03 How Gitcord Works** | `#how-it-works` | 4-step pipeline block (Read ➔ Plan ➔ Report ➔ Apply) and boundary callout | **Completed (MVP)** |
-| **04 Link Your Account** | `#linking` | 4-step identity verification walkthrough with sticky Discord chat mockup | **Completed (MVP)** |
-| **05 Features Reference** | `#features` | Clean two-column reference table of verified engine capabilities | **Completed (MVP)** |
-| **06 Quick Start** | `#quickstart` | Tabbed code blocks for Docker Compose and local Python 3.11+ setup | **Completed (MVP)** |
-| **07 Footer** | Bottom | 4-column documentation footer, Contributing link, GPL-3.0 license note | **Completed (MVP)** |
+| Section                   | Target Anchor   | Description                                                                       | Status              |
+| :------------------------ | :-------------- | :-------------------------------------------------------------------------------- | :------------------ |
+| **01 Navbar**             | Top             | Sticky 56px solid header, logo, anchor navigation, GitHub link, mobile drawer     | **Completed (MVP)** |
+| **02 Hero**               | `#hero`         | Asymmetrical 7:5 split: headline, facts, action buttons, flat architecture mockup | **Completed (MVP)** |
+| **03 How Gitcord Works**  | `#how-it-works` | 4-step pipeline block (Read ➔ Plan ➔ Report ➔ Apply) and boundary callout         | **Completed (MVP)** |
+| **04 Link Your Account**  | `#linking`      | 4-step identity verification walkthrough with sticky Discord chat mockup          | **Completed (MVP)** |
+| **05 Features Reference** | `#features`     | Clean two-column reference table of verified engine capabilities                  | **Completed (MVP)** |
+| **06 Quick Start**        | `#quickstart`   | Tabbed code blocks for Docker Compose and local Python 3.11+ setup                | **Completed (MVP)** |
+| **07 Footer**             | Bottom          | 4-column documentation footer, Contributing link, GPL-3.0 license note            | **Completed (MVP)** |
 
-*More sections planned for post-MVP review: PR lifecycle event timeline (`#pr-flow`), full searchable slash command reference table (`#commands`), and safety & permission comparison (`#safety`).*
+_More sections planned for post-MVP review: PR lifecycle event timeline (`#pr-flow`), full searchable slash command reference table (`#commands`), and safety & permission comparison (`#safety`)._
 
 ---
 
@@ -50,20 +51,20 @@ This repository contains the marketing and documentation landing page for **Gitc
 
 All dependencies in [`package.json`](package.json) are pinned without `^` or `~`:
 
-| Package | Version | Purpose |
-| :--- | :--- | :--- |
-| `react` / `react-dom` | `19.3.1` | Core UI library |
-| `typescript` | `6.0.3` | Strict type checking with zero `any` |
-| `vite` | `8.3.4` | Build tool and local development server |
-| `tailwindcss` | `3.4.19` | Utility styling with custom `Brand.md` color tokens |
-| `postcss` | `8.5.31` | CSS transformation pipeline |
-| `autoprefixer` | `10.6.1` | Cross-browser CSS prefixing |
-| `gsap` | `3.15.0` | Controlled animations (ScrollTrigger) |
-| `@gsap/react` | `2.1.2` | React lifecycle hooks for GSAP context |
-| `lenis` | `1.3.27` | Smooth scrolling engine connected to GSAP ticker |
-| `lucide-react` | `1.61.0` | Accessible functional icons |
-| `eslint` | `10.13.0` | Linting and code quality |
-| `prettier` | `3.9.10` | Consistent formatting |
+| Package               | Version   | Purpose                                             |
+| :-------------------- | :-------- | :-------------------------------------------------- |
+| `react` / `react-dom` | `19.3.1`  | Core UI library                                     |
+| `typescript`          | `6.0.3`   | Strict type checking with zero `any`                |
+| `vite`                | `8.3.4`   | Build tool and local development server             |
+| `tailwindcss`         | `3.4.19`  | Utility styling with custom `Brand.md` color tokens |
+| `postcss`             | `8.5.31`  | CSS transformation pipeline                         |
+| `autoprefixer`        | `10.6.1`  | Cross-browser CSS prefixing                         |
+| `gsap`                | `3.15.0`  | Controlled animations (ScrollTrigger)               |
+| `@gsap/react`         | `2.1.2`   | React lifecycle hooks for GSAP context              |
+| `lenis`               | `1.3.27`  | Smooth scrolling engine connected to GSAP ticker    |
+| `lucide-react`        | `1.61.0`  | Accessible functional icons                         |
+| `eslint`              | `10.13.0` | Linting and code quality                            |
+| `prettier`            | `3.9.10`  | Consistent formatting                               |
 
 ---
 
@@ -137,6 +138,7 @@ gitcord-landing/
 ### Prerequisites
 
 Minimum engine versions specified in `package.json`:
+
 - **Node.js:** `>=20.0.0`
 - **pnpm:** `>=9.0.0`
 
@@ -166,6 +168,7 @@ pnpm run preview
 ## How to Edit Content
 
 To keep copy easily maintainable and fact-checked, content is decoupled into typed data files:
+
 - **Navigation & Links:** [`src/data/brand.ts`](src/data/brand.ts)
 - **Pipeline Stages:** [`src/components/sections/PipelineSection.tsx`](src/components/sections/PipelineSection.tsx)
 - **Linking Steps & Mockups:** [`src/components/sections/LinkingSection.tsx`](src/components/sections/LinkingSection.tsx)
@@ -181,15 +184,15 @@ To keep copy easily maintainable and fact-checked, content is decoupled into typ
 
 ## Reference Links
 
-| Resource | Link |
-| :--- | :--- |
-| **Upstream Gitcord Repository** | [github.com/AOSSIE-Org/Gitcord-GithubDiscordBot](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot) |
-| **Gitcord Installation Guide** | [`INSTALLATION.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/INSTALLATION.md) |
-| **Gitcord Technical Documentation** | [`TECHNICAL_DOCUMENTATION.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/TECHNICAL_DOCUMENTATION.md) |
-| **Docker Deployment Guide** | [`docs/DOCKER.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/docs/DOCKER.md) |
-| **Brand Specifications** | [`brand/Brand.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/brand/Brand.md) |
-| **AOSSIE Discord (#gitcord thread)** | [AOSSIE Discord Community](https://discord.com/channels/1022871757289422898/1465995983791063140) |
-| **Contributing Guidelines** | [`CONTRIBUTING.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/CONTRIBUTING.md) |
+| Resource                             | Link                                                                                                                        |
+| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| **Upstream Gitcord Repository**      | [github.com/AOSSIE-Org/Gitcord-GithubDiscordBot](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot)                    |
+| **Gitcord Installation Guide**       | [`INSTALLATION.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/INSTALLATION.md)                       |
+| **Gitcord Technical Documentation**  | [`TECHNICAL_DOCUMENTATION.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/TECHNICAL_DOCUMENTATION.md) |
+| **Docker Deployment Guide**          | [`docs/DOCKER.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/docs/DOCKER.md)                         |
+| **Brand Specifications**             | [`brand/Brand.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/brand/Brand.md)                         |
+| **AOSSIE Discord (#gitcord thread)** | [AOSSIE Discord Community](https://discord.com/channels/1022871757289422898/1465995983791063140)                            |
+| **Contributing Guidelines**          | [`CONTRIBUTING.md`](https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/CONTRIBUTING.md)                       |
 
 ---
 

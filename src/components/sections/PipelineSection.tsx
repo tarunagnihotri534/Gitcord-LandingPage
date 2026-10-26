@@ -50,7 +50,8 @@ export const PipelineSection: React.FC = () => {
             Deterministic 4-step pipeline
           </h2>
           <p className="text-base text-gitcord-muted leading-relaxed">
-            Gitcord separates ingestion, deterministic scoring, and execution into strict boundaries:
+            Gitcord separates ingestion, deterministic scoring, and execution into strict
+            boundaries:
           </p>
         </div>
 
@@ -97,7 +98,10 @@ export const PipelineSection: React.FC = () => {
 
         {/* Callout Notice */}
         <div className="mt-6 p-4 rounded-lg border border-gitcord-border bg-gitcord-surface flex items-start gap-3 text-xs shadow-clean-sm">
-          <ShieldCheck className="w-4 h-4 text-gitcord-blurple shrink-0 mt-0.5" aria-hidden="true" />
+          <ShieldCheck
+            className="w-4 h-4 text-gitcord-blurple shrink-0 mt-0.5"
+            aria-hidden="true"
+          />
           <div className="space-y-0.5">
             <p className="font-semibold text-gitcord-heading">Execution boundary policy</p>
             <p className="text-gitcord-muted leading-relaxed">

@@ -21,9 +21,11 @@ export const BRAND_CONFIG = {
     github: 'https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot',
     discordThread: 'https://discord.com/channels/1022871757289422898/1465995983791063140',
     discordInvite: 'https://discord.gg/hjUhu33uAn',
-    installation: 'https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/INSTALLATION.md',
+    installation:
+      'https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/INSTALLATION.md',
     dockerGuide: 'https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/docs/DOCKER.md',
-    contributing: 'https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/CONTRIBUTING.md',
+    contributing:
+      'https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/CONTRIBUTING.md',
     license: 'https://github.com/AOSSIE-Org/Gitcord-GithubDiscordBot/blob/main/LICENSE',
     aossieWebsite: 'https://aossie.org/',
     aossieTwitter: 'https://x.com/aossie_org',

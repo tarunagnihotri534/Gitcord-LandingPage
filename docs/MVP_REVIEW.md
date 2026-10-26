@@ -25,34 +25,35 @@ The MVP delivers a complete, cohesive, accessible documentation-style landing pa
 6. **Deployment Guide (`QuickStartSection`)**:
    - Tabbed container comparing `Docker Compose (Recommended)` and `Local Python (3.11+)` with copy-to-clipboard terminal code blocks using verified commands from the repository, plus links to `INSTALLATION.md` and `docs/DOCKER.md`.
 7. **Footer (`Footer`)**:
-   - Semantic footer with docs links, AOSSIE links, `#gitcord` Discord thread, GPL-3.0 note, and the notice: *"Unofficial preview, pending maintainer review."*
+   - Semantic footer with docs links, AOSSIE links, `#gitcord` Discord thread, GPL-3.0 note, and the notice: _"Unofficial preview, pending maintainer review."_
 
 ---
 
 ## 2. What Is Deliberately Left Out of the MVP
 
 To maintain high code quality and focused scope for initial maintainer feedback, the following sections from the original full proposal were postponed:
+
 - **PR Event Timeline (`#pr-flow`)**: Detailed 6-step lifecycle timeline from PR open to Discord notifications and `/pr-status` check.
 - **Searchable Commands Table (`#commands`)**: Complete interactive filterable table of all 18 slash commands.
 - **Safety Deep-Dive (`#safety`)**: Dedicated diff comparison and configuration matrix for active mode.
 
-*These sections are tracked as post-MVP additions in `README.md`.*
+_These sections are tracked as post-MVP additions in `README.md`._
 
 ---
 
 ## 3. Fact Sources & Verification Mapping
 
-| Content Element | Upstream Source File | Exact Verification |
-| :--- | :--- | :--- |
-| **Pipeline Definitions** | `README.md` (Architecture Diagram) | Readers are read-only; Planners are deterministic; Writers are thin executors gated by MutationPolicy. |
-| **Audit Reports** | `TECHNICAL_DOCUMENTATION.md` (Section 4.7) | Reports generated in `data/reports/audit.json` and `data/reports/audit.md` before writes. |
-| **Ephemeral Reply & Verify Button** | `QUICK_START_GUIDE.txt` (Line 16) | *"Bot replies (ephemeral) with a short verification code and a Verify button"*. |
-| **Linking Parameters** | `QUICK_START_GUIDE.txt` (Lines 14 & 18) | `/link github_username:<login>` and `/verify-link github_username:<login>`. |
-| **`/profile` Scope** | `README.md` (Line 296) | Shows GitHub identity, verification status, connected socials, and Discord roles (7d/30d metrics belong to `/summary`). |
-| **Docker Quick Start** | `docs/DOCKER.md` (Quick Start) | `docker compose up -d`, `docker compose logs -f bot`, `docker compose run --rm bot ... run-once`. |
-| **Scheduler Interval** | `README.md` (Linux VPS) | Runs every 6 hours by default; customized via `GITCORD_SYNC_INTERVAL_SECONDS`. |
-| **Brand Tokens** | `brand/Brand.md` | Blurple (`#5865F2`), Dark (`#0D1117`), Green (`#238636`), Surface (`#161B22`), Border (`#30363D`), Muted (`#8B949E`). |
-| **Administrator Warning** | `INSTALLATION.md` (Step 3.3 & Security) | *"Never use Administrator permission. Not needed: Administrator, Manage Server, Kick/Ban, Manage Channels."* |
+| Content Element                     | Upstream Source File                       | Exact Verification                                                                                                      |
+| :---------------------------------- | :----------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| **Pipeline Definitions**            | `README.md` (Architecture Diagram)         | Readers are read-only; Planners are deterministic; Writers are thin executors gated by MutationPolicy.                  |
+| **Audit Reports**                   | `TECHNICAL_DOCUMENTATION.md` (Section 4.7) | Reports generated in `data/reports/audit.json` and `data/reports/audit.md` before writes.                               |
+| **Ephemeral Reply & Verify Button** | `QUICK_START_GUIDE.txt` (Line 16)          | _"Bot replies (ephemeral) with a short verification code and a Verify button"_.                                         |
+| **Linking Parameters**              | `QUICK_START_GUIDE.txt` (Lines 14 & 18)    | `/link github_username:<login>` and `/verify-link github_username:<login>`.                                             |
+| **`/profile` Scope**                | `README.md` (Line 296)                     | Shows GitHub identity, verification status, connected socials, and Discord roles (7d/30d metrics belong to `/summary`). |
+| **Docker Quick Start**              | `docs/DOCKER.md` (Quick Start)             | `docker compose up -d`, `docker compose logs -f bot`, `docker compose run --rm bot ... run-once`.                       |
+| **Scheduler Interval**              | `README.md` (Linux VPS)                    | Runs every 6 hours by default; customized via `GITCORD_SYNC_INTERVAL_SECONDS`.                                          |
+| **Brand Tokens**                    | `brand/Brand.md`                           | Blurple (`#5865F2`), Dark (`#0D1117`), Green (`#238636`), Surface (`#161B22`), Border (`#30363D`), Muted (`#8B949E`).   |
+| **Administrator Warning**           | `INSTALLATION.md` (Step 3.3 & Security)    | _"Never use Administrator permission. Not needed: Administrator, Manage Server, Kick/Ban, Manage Channels."_            |
 
 ---
 
@@ -61,10 +62,10 @@ To maintain high code quality and focused scope for initial maintainer feedback,
 1. **GitHub PAT `Contents` Scope Discrepancy**:
    - `README.md` lists `Contents (Read & Write)` under Quick Setup.
    - `INSTALLATION.md` Section 1.3 lists `Contents (Read)` (explaining Write is only needed on Issues/PRs).
-   - *Status:* Both perspectives are documented in `docs/GITCORD_OVERVIEW.md` until maintainers clarify.
+   - _Status:_ Both perspectives are documented in `docs/GITCORD_OVERVIEW.md` until maintainers clarify.
 2. **Stability Nexus Partner Integration**:
    - The upstream repository contains `public/stability.svg` and references Stability Nexus bot stacks in `QUICK_START_GUIDE.txt`.
-   - *Status:* Preserved in brand assets, but not featured on the MVP landing page to focus on the core AOSSIE project.
+   - _Status:_ Preserved in brand assets, but not featured on the MVP landing page to focus on the core AOSSIE project.
 
 ---
 

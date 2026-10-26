@@ -135,8 +135,6 @@ export const SmoothScrollProvider: React.FC<SmoothScrollProviderProps> = ({ chil
   );
 
   return (
-    <SmoothScrollContext.Provider value={contextValue}>
-      {children}
-    </SmoothScrollContext.Provider>
+    <SmoothScrollContext.Provider value={contextValue}>{children}</SmoothScrollContext.Provider>
   );
 };

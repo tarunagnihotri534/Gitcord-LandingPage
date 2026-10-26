@@ -70,17 +70,27 @@ export const Hero: React.FC = () => {
                       <GithubIcon className="w-3.5 h-3.5 text-gitcord-heading" aria-hidden="true" />
                       <span>GitHub Activity</span>
                     </div>
-                    <span className="text-[11px] text-gitcord-green font-medium">Read-only Ingest</span>
+                    <span className="text-[11px] text-gitcord-green font-medium">
+                      Read-only Ingest
+                    </span>
                   </div>
                   <div className="flex items-start gap-2.5 text-xs">
-                    <GitPullRequest className="w-4 h-4 text-gitcord-green shrink-0 mt-0.5" aria-hidden="true" />
+                    <GitPullRequest
+                      className="w-4 h-4 text-gitcord-green shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    />
                     <div className="space-y-1">
                       <p className="font-mono text-gitcord-heading text-[11px] font-semibold">
                         PR #84: Deterministic role sync
                       </p>
                       <div className="flex items-center gap-2 text-gitcord-muted text-[11px]">
-                        <span>Author: <span className="text-gitcord-text font-mono">@contributor</span></span>
-                        <span className="w-1 h-1 rounded-full bg-gitcord-border" aria-hidden="true" />
+                        <span>
+                          Author: <span className="text-gitcord-text font-mono">@contributor</span>
+                        </span>
+                        <span
+                          className="w-1 h-1 rounded-full bg-gitcord-border"
+                          aria-hidden="true"
+                        />
                         <span>3 commits merged</span>
                       </div>
                     </div>
@@ -94,7 +104,10 @@ export const Hero: React.FC = () => {
                   </div>
                   <div className="relative px-3 py-1 rounded bg-gitcord-surface-elev border border-gitcord-border text-[11px] font-mono text-gitcord-heading flex items-center gap-2 shadow-clean-sm">
                     <picture>
-                      <source srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`} type="image/webp" />
+                      <source
+                        srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`}
+                        type="image/webp"
+                      />
                       <img
                         src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
                         alt="Gitcord Engine"
@@ -117,10 +130,15 @@ export const Hero: React.FC = () => {
                 <div className="p-3 rounded-md border border-gitcord-border bg-gitcord-dark">
                   <div className="flex items-center justify-between text-xs font-mono text-gitcord-muted mb-2">
                     <div className="flex items-center gap-1.5 text-gitcord-heading font-medium">
-                      <DiscordIcon className="w-3.5 h-3.5 text-gitcord-blurple" aria-hidden="true" />
+                      <DiscordIcon
+                        className="w-3.5 h-3.5 text-gitcord-blurple"
+                        aria-hidden="true"
+                      />
                       <span>Discord Server State</span>
                     </div>
-                    <span className="text-[11px] text-gitcord-blurple font-medium">Role Assignment Plan</span>
+                    <span className="text-[11px] text-gitcord-blurple font-medium">
+                      Role Assignment Plan
+                    </span>
                   </div>
                   <div className="space-y-1.5 text-xs">
                     <div className="flex items-center justify-between text-[11px]">
@@ -134,7 +152,8 @@ export const Hero: React.FC = () => {
                       </span>
                     </div>
                     <div className="mt-2 pt-2 border-t border-gitcord-border text-[11px] font-mono text-gitcord-muted">
-                      Audit log: <span className="text-gitcord-text font-mono">data/reports/audit.md</span>
+                      Audit log:{' '}
+                      <span className="text-gitcord-text font-mono">data/reports/audit.md</span>
                     </div>
                   </div>
                 </div>

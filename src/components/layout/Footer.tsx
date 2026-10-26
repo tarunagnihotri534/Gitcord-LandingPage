@@ -74,8 +74,10 @@ export const Footer: React.FC = () => {
       className="site-footer w-full bg-gitcord-surface border-t border-gitcord-border mt-24 py-8 md:py-10 transition-colors duration-200"
       aria-labelledby="footer-heading"
     >
-      <h2 id="footer-heading" className="sr-only">Footer</h2>
-      
+      <h2 id="footer-heading" className="sr-only">
+        Footer
+      </h2>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-6">
           {/* LEFT SECTION: AOSSIE Brand & Mission */}
@@ -89,7 +91,10 @@ export const Footer: React.FC = () => {
               aria-label="Visit AOSSIE organization website"
             >
               <picture>
-                <source srcSet={`${import.meta.env.BASE_URL}aossie_logo.svg`} type="image/svg+xml" />
+                <source
+                  srcSet={`${import.meta.env.BASE_URL}aossie_logo.svg`}
+                  type="image/svg+xml"
+                />
                 <source srcSet={`${import.meta.env.BASE_URL}AOSSIE-Logo.webp`} type="image/webp" />
                 <img
                   src={`${import.meta.env.BASE_URL}aossie_logo.svg`}
@@ -110,7 +115,9 @@ export const Footer: React.FC = () => {
 
             {/* Description */}
             <p className="text-xs sm:text-sm text-gitcord-muted leading-relaxed text-center sm:text-left">
-              AOSSIE is a non-profit organization dedicated to building impactful open-source software, mentoring contributors, and fostering innovation through global collaboration.
+              AOSSIE is a non-profit organization dedicated to building impactful open-source
+              software, mentoring contributors, and fostering innovation through global
+              collaboration.
             </p>
           </div>
 
@@ -124,7 +131,10 @@ export const Footer: React.FC = () => {
 
             <div className="flex flex-col items-center gap-5">
               {/* Navigation */}
-              <nav aria-label="Footer Navigation" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              <nav
+                aria-label="Footer Navigation"
+                className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+              >
                 {FOOTER_LINKS.map((item) => (
                   <a
                     key={item.label}
@@ -182,7 +192,10 @@ export const Footer: React.FC = () => {
                   className="inline-flex items-center gap-1.5 ml-2 hover:opacity-80 transition-opacity"
                 >
                   <picture>
-                    <source srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`} type="image/webp" />
+                    <source
+                      srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`}
+                      type="image/webp"
+                    />
                     <img
                       src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
                       alt="Gitcord Logo"
@@ -202,7 +215,10 @@ export const Footer: React.FC = () => {
               {/* Made with love by AOSSIE */}
               <p className="flex items-center justify-center lg:justify-end gap-1.5 text-sm font-normal text-gitcord-muted">
                 <span>Made with</span>
-                <Heart className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400 inline" aria-label="love" />
+                <Heart
+                  className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400 inline"
+                  aria-label="love"
+                />
                 <span>
                   by{' '}
                   <a

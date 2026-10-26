@@ -5,8 +5,6 @@ import { useSmoothScroll } from '../../context/useSmoothScroll';
 import { DiscordIcon, GithubIcon } from '../common/Icons';
 import { Check, ExternalLink, HelpCircle, UserX, MessageSquare } from 'lucide-react';
 
-
-
 interface StepItem {
   readonly id: string;
   readonly letter: string;
@@ -97,7 +95,11 @@ export const LinkingSection: React.FC = () => {
             Link your GitHub account
           </h2>
           <p className="text-base text-gitcord-muted leading-relaxed">
-            Most commands need a verified link. Start with <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-gitcord-surface border border-gitcord-border text-gitcord-text">/link</code> to connect your Discord identity to your GitHub account without sharing credentials.
+            Most commands need a verified link. Start with{' '}
+            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-gitcord-surface border border-gitcord-border text-gitcord-text">
+              /link
+            </code>{' '}
+            to connect your Discord identity to your GitHub account without sharing credentials.
           </p>
         </div>
 
@@ -162,7 +164,10 @@ export const LinkingSection: React.FC = () => {
                       <div className="flex items-center justify-between text-[11px]">
                         <span className="font-semibold text-gitcord-heading flex items-center gap-1.5">
                           <picture>
-                            <source srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`} type="image/webp" />
+                            <source
+                              srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`}
+                              type="image/webp"
+                            />
                             <img
                               src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
                               alt="Gitcord Bot"
@@ -174,7 +179,9 @@ export const LinkingSection: React.FC = () => {
                           </picture>
                           <span>Gitcord Bot</span>
                         </span>
-                        <span className="text-[10px] text-gitcord-muted">Only you can see this (ephemeral)</span>
+                        <span className="text-[10px] text-gitcord-muted">
+                          Only you can see this (ephemeral)
+                        </span>
                       </div>
                       <p className="text-gitcord-text text-xs">
                         Add this verification code to your GitHub bio or a public gist:
@@ -203,11 +210,20 @@ export const LinkingSection: React.FC = () => {
                         <span>GitHub Profile Inspection</span>
                       </div>
                       <div className="text-[11px] font-mono text-gitcord-muted space-y-1">
-                        <p>Target: <span className="text-gitcord-heading">github.com/contributor</span></p>
-                        <p>Bio string: <span className="text-gitcord-green font-semibold">"Working on open source | gitcord-verify-8f2a"</span></p>
+                        <p>
+                          Target:{' '}
+                          <span className="text-gitcord-heading">github.com/contributor</span>
+                        </p>
+                        <p>
+                          Bio string:{' '}
+                          <span className="text-gitcord-green font-semibold">
+                            "Working on open source | gitcord-verify-8f2a"
+                          </span>
+                        </p>
                       </div>
                       <p className="text-xs text-gitcord-muted pt-1">
-                        Code verified in profile bio. You can remove it after verification completes.
+                        Code verified in profile bio. You can remove it after verification
+                        completes.
                       </p>
                     </div>
                   </div>
@@ -238,7 +254,11 @@ export const LinkingSection: React.FC = () => {
                         <span>Link verified</span>
                       </div>
                       <p className="text-gitcord-text text-xs">
-                        Successfully verified <span className="font-mono text-gitcord-heading font-semibold">contributor</span>. Your Discord account is now linked.
+                        Successfully verified{' '}
+                        <span className="font-mono text-gitcord-heading font-semibold">
+                          contributor
+                        </span>
+                        . Your Discord account is now linked.
                       </p>
                       <p className="text-[11px] font-mono text-gitcord-muted">
                         State recorded in local SQLite database.
@@ -277,11 +297,15 @@ export const LinkingSection: React.FC = () => {
                       <div className="grid grid-cols-2 gap-2 text-[11px] pt-1">
                         <div>
                           <span className="text-gitcord-muted block">GitHub Identity:</span>
-                          <span className="font-mono text-gitcord-heading font-medium">@contributor</span>
+                          <span className="font-mono text-gitcord-heading font-medium">
+                            @contributor
+                          </span>
                         </div>
                         <div>
                           <span className="text-gitcord-muted block">Discord Account:</span>
-                          <span className="font-mono text-gitcord-heading font-medium">contributor</span>
+                          <span className="font-mono text-gitcord-heading font-medium">
+                            contributor
+                          </span>
                         </div>
                         <div>
                           <span className="text-gitcord-muted block">Assigned Roles:</span>
@@ -302,7 +326,9 @@ export const LinkingSection: React.FC = () => {
               {/* Mockup Status Bar */}
               <div className="px-3.5 py-2 bg-gitcord-surface border-t border-gitcord-border text-[11px] font-mono text-gitcord-muted flex items-center justify-between">
                 <span>Verification Workflow</span>
-                <span className="text-gitcord-heading font-medium">Step {STEPS[activeStep].letter} of d</span>
+                <span className="text-gitcord-heading font-medium">
+                  Step {STEPS[activeStep].letter} of d
+                </span>
               </div>
             </div>
           </div>
@@ -336,9 +362,7 @@ export const LinkingSection: React.FC = () => {
                         {step.description}
                       </p>
                       {step.note && (
-                        <p className="text-[11px] text-gitcord-muted">
-                          Note: {step.note}
-                        </p>
+                        <p className="text-[11px] text-gitcord-muted">Note: {step.note}</p>
                       )}
                     </div>
                   </div>
@@ -353,27 +377,50 @@ export const LinkingSection: React.FC = () => {
               </p>
               <ul className="space-y-2 text-xs text-gitcord-muted">
                 <li className="flex items-start gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-gitcord-blurple shrink-0 mt-0.5" aria-hidden="true" />
+                  <MessageSquare
+                    className="w-3.5 h-3.5 text-gitcord-blurple shrink-0 mt-0.5"
+                    aria-hidden="true"
+                  />
                   <span>
-                    <strong className="text-gitcord-heading">Welcome DM:</strong> When <code className="font-mono text-[11px] text-gitcord-text">discord.welcome_dm_on_join: true</code>, new members receive an automatic DM with a <em>"Start linking"</em> button.
+                    <strong className="text-gitcord-heading">Welcome DM:</strong> When{' '}
+                    <code className="font-mono text-[11px] text-gitcord-text">
+                      discord.welcome_dm_on_join: true
+                    </code>
+                    , new members receive an automatic DM with a <em>"Start linking"</em> button.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <HelpCircle className="w-3.5 h-3.5 text-gitcord-muted shrink-0 mt-0.5" aria-hidden="true" />
+                  <HelpCircle
+                    className="w-3.5 h-3.5 text-gitcord-muted shrink-0 mt-0.5"
+                    aria-hidden="true"
+                  />
                   <span>
-                    <code className="font-mono text-[11px] text-gitcord-text">/help-link @member</code>: Help another member start linking.
+                    <code className="font-mono text-[11px] text-gitcord-text">
+                      /help-link @member
+                    </code>
+                    : Help another member start linking.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ExternalLink className="w-3.5 h-3.5 text-gitcord-muted shrink-0 mt-0.5" aria-hidden="true" />
+                  <ExternalLink
+                    className="w-3.5 h-3.5 text-gitcord-muted shrink-0 mt-0.5"
+                    aria-hidden="true"
+                  />
                   <span>
-                    <code className="font-mono text-[11px] text-gitcord-text">/who-is &lt;github_username&gt;</code>: Look up a GitHub username to find their verified Discord account.
+                    <code className="font-mono text-[11px] text-gitcord-text">
+                      /who-is &lt;github_username&gt;
+                    </code>
+                    : Look up a GitHub username to find their verified Discord account.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <UserX className="w-3.5 h-3.5 text-gitcord-muted shrink-0 mt-0.5" aria-hidden="true" />
+                  <UserX
+                    className="w-3.5 h-3.5 text-gitcord-muted shrink-0 mt-0.5"
+                    aria-hidden="true"
+                  />
                   <span>
-                    <code className="font-mono text-[11px] text-gitcord-text">/unlink</code>: Unlink your GitHub identity if you need to switch accounts.
+                    <code className="font-mono text-[11px] text-gitcord-text">/unlink</code>: Unlink
+                    your GitHub identity if you need to switch accounts.
                   </span>
                 </li>
               </ul>

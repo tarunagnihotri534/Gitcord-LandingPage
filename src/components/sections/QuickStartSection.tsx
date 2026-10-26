@@ -62,7 +62,8 @@ ghdcbot --config config/config.yaml bot`;
             Quick start guide
           </h2>
           <p className="text-base text-gitcord-muted leading-relaxed">
-            Run Gitcord locally or on an always-on host. Verified setup commands from the repository documentation:
+            Run Gitcord locally or on an always-on host. Verified setup commands from the repository
+            documentation:
           </p>
         </div>
 
@@ -98,10 +99,7 @@ ghdcbot --config config/config.yaml bot`;
             <button
               type="button"
               onClick={() =>
-                handleCopy(
-                  activeTab === 'docker' ? dockerSnippet : pythonSnippet,
-                  activeTab
-                )
+                handleCopy(activeTab === 'docker' ? dockerSnippet : pythonSnippet, activeTab)
               }
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-mono text-gitcord-muted hover:text-gitcord-heading hover:bg-gitcord-surface-elev border border-transparent hover:border-gitcord-border transition-colors duration-150 cursor-pointer"
               aria-label="Copy commands to clipboard"

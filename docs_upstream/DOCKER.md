@@ -132,41 +132,41 @@ For each org:
 
 ## Dockerfile Design (Why Each Part)
 
-| Section | Purpose |
-|--------|--------|
-| `FROM python:3.11-slim` | Matches `requires-python = ">=3.11"`; slim reduces image size and attack surface. |
-| `PYTHONDONTWRITEBYTECODE=1` | Avoids writing `.pyc` in the image; cleaner and slightly faster. |
-| `PYTHONUNBUFFERED=1` | Logs show up immediately in `docker compose logs`. |
-| Copy `pyproject.toml` + `src/` then `pip install -e .` | Dependency layer is cached; only code/setup changes trigger reinstall. |
-| `useradd appuser` / `USER appuser` | Process runs as non-root. |
-| `ENTRYPOINT ["ghdcbot"]` | Lets `docker compose run bot --config … run-once` work without repeating the binary name. |
-| `CMD ["--config", "/app/config/config.yaml", "bot"]` | Default is Discord bot; override args for `run-once` etc. |
+| Section                                                | Purpose                                                                                   |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| `FROM python:3.11-slim`                                | Matches `requires-python = ">=3.11"`; slim reduces image size and attack surface.         |
+| `PYTHONDONTWRITEBYTECODE=1`                            | Avoids writing `.pyc` in the image; cleaner and slightly faster.                          |
+| `PYTHONUNBUFFERED=1`                                   | Logs show up immediately in `docker compose logs`.                                        |
+| Copy `pyproject.toml` + `src/` then `pip install -e .` | Dependency layer is cached; only code/setup changes trigger reinstall.                    |
+| `useradd appuser` / `USER appuser`                     | Process runs as non-root.                                                                 |
+| `ENTRYPOINT ["ghdcbot"]`                               | Lets `docker compose run bot --config … run-once` work without repeating the binary name. |
+| `CMD ["--config", "/app/config/config.yaml", "bot"]`   | Default is Discord bot; override args for `run-once` etc.                                 |
 
 ---
 
 ## docker-compose.yml Design
 
-| Section | Purpose |
-|--------|--------|
-| `init_data` service | Runs once as root to `chown` the volume to `appuser` so the bot (non-root) can write; then exits. Bot starts after it completes. |
-| `env_file: .env` | Loads `GITHUB_TOKEN` and `DISCORD_TOKEN`; config YAML uses `${GITHUB_TOKEN}` etc. |
-| `./config:/app/config:ro` | Host config dir mounted read-only; edit YAML on host without rebuilding. |
-| `gitcord_data:/data` | Named volume for SQLite and reports; survives `docker compose down`. |
-| `command: ["--config", "/app/config/config.yaml", "bot"]` | Ensures config path is correct and default is bot. |
-| `restart: unless-stopped` | Bot comes back after reboot or Docker restart. |
+| Section                                                   | Purpose                                                                                                                          |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `init_data` service                                       | Runs once as root to `chown` the volume to `appuser` so the bot (non-root) can write; then exits. Bot starts after it completes. |
+| `env_file: .env`                                          | Loads `GITHUB_TOKEN` and `DISCORD_TOKEN`; config YAML uses `${GITHUB_TOKEN}` etc.                                                |
+| `./config:/app/config:ro`                                 | Host config dir mounted read-only; edit YAML on host without rebuilding.                                                         |
+| `gitcord_data:/data`                                      | Named volume for SQLite and reports; survives `docker compose down`.                                                             |
+| `command: ["--config", "/app/config/config.yaml", "bot"]` | Ensures config path is correct and default is bot.                                                                               |
+| `restart: unless-stopped`                                 | Bot comes back after reboot or Docker restart.                                                                                   |
 
 ---
 
 ## Common Pitfalls and How to Avoid Them
 
-| Pitfall | Cause | Fix |
-|--------|--------|-----|
-| **"Config file does not exist"** | No `config/config.yaml` or wrong path. | Copy `config/docker-example.yaml` to `config/config.yaml` and keep `data_dir: "/data"`. |
-| **"Missing required environment variable: GITHUB_TOKEN"** | `.env` missing or not loaded. | Create `.env` in project root (same dir as `docker-compose.yml`) with `GITHUB_TOKEN` and `DISCORD_TOKEN`. |
-| **State lost after restart** | `data_dir` pointed at a non-persistent path. | Use `data_dir: "/data"` and the provided `docker-compose` volume; do not override `/data` with a host path unless you intend to. |
-| **Bot doesn’t respond / "application did not respond"** | Same as non-Docker: slow storage or missing intents. | Ensure Server Members Intent is enabled; check logs with `docker compose logs -f`. |
-| **Permission errors on `/data`** | Container user cannot write. | Dockerfile already runs as `appuser`; the volume is writable by the container. If you use a host bind mount for `data`, ensure the host dir is writable (e.g. `chown` to the same UID as `appuser`). |
-| **Running both bot and run-once** | Need two invocations. | Bot: `docker compose up -d`. Run-once: `docker compose run --rm bot --config /app/config/config.yaml run-once`. |
+| Pitfall                                                   | Cause                                                | Fix                                                                                                                                                                                                  |
+| --------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **"Config file does not exist"**                          | No `config/config.yaml` or wrong path.               | Copy `config/docker-example.yaml` to `config/config.yaml` and keep `data_dir: "/data"`.                                                                                                              |
+| **"Missing required environment variable: GITHUB_TOKEN"** | `.env` missing or not loaded.                        | Create `.env` in project root (same dir as `docker-compose.yml`) with `GITHUB_TOKEN` and `DISCORD_TOKEN`.                                                                                            |
+| **State lost after restart**                              | `data_dir` pointed at a non-persistent path.         | Use `data_dir: "/data"` and the provided `docker-compose` volume; do not override `/data` with a host path unless you intend to.                                                                     |
+| **Bot doesn’t respond / "application did not respond"**   | Same as non-Docker: slow storage or missing intents. | Ensure Server Members Intent is enabled; check logs with `docker compose logs -f`.                                                                                                                   |
+| **Permission errors on `/data`**                          | Container user cannot write.                         | Dockerfile already runs as `appuser`; the volume is writable by the container. If you use a host bind mount for `data`, ensure the host dir is writable (e.g. `chown` to the same UID as `appuser`). |
+| **Running both bot and run-once**                         | Need two invocations.                                | Bot: `docker compose up -d`. Run-once: `docker compose run --rm bot --config /app/config/config.yaml run-once`.                                                                                      |
 
 ---
 
@@ -240,8 +240,8 @@ When enabled, Gitcord posts **one** maintainer digest per ISO week after a succe
 discord:
   digest:
     enabled: true
-    channel_id: "YOUR_MENTOR_CHANNEL_ID"
-    weekday_utc: 6   # Sunday
+    channel_id: 'YOUR_MENTOR_CHANNEL_ID'
+    weekday_utc: 6 # Sunday
     hour_utc: 12
     lookback_days: 7
     top_n: 5
@@ -271,11 +271,11 @@ docker compose run --rm bot --config /app/config/config.yaml run-once
 
 Mentors can route a repo's **PR-opened and issue-opened** posts to a channel or thread without editing `gitcord.yaml` or restarting the bot:
 
-| Command | What it does |
-| ------- | ------------ |
-| `/pr-channel set repo:<name> [channel:<channel or thread>]` | Post the repo's new PRs and issues to `channel` (default: where you run it). Re-running moves the repo. |
-| `/pr-channel remove repo:<name>` | Delete the route set from Discord. If `gitcord.yaml` also maps the repo, it falls back to that channel. |
-| `/pr-channel list [all:true]` | Repos posting to this channel, or every route grouped by channel (`config` = `gitcord.yaml`, `discord` = set with the command). |
+| Command                                                     | What it does                                                                                                                    |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `/pr-channel set repo:<name> [channel:<channel or thread>]` | Post the repo's new PRs and issues to `channel` (default: where you run it). Re-running moves the repo.                         |
+| `/pr-channel remove repo:<name>`                            | Delete the route set from Discord. If `gitcord.yaml` also maps the repo, it falls back to that channel.                         |
+| `/pr-channel list [all:true]`                               | Repos posting to this channel, or every route grouped by channel (`config` = `gitcord.yaml`, `discord` = set with the command). |
 
 - **Who:** `discord.command_permissions.pr-channel`; when that key is absent, the `sync` rule applies (Mentor + admins in AOSSIE / SN).
 - **Layering:** routes are stored in SQLite (`repo_channel_routes`, shared by bot and scheduler on the same volume) and applied on top of `gitcord.yaml` at every sync. A Discord route overrides the YAML channel for that repo. With `repos.mode: allow` the repo is added to the scan list automatically; deny-listed repos are refused.
