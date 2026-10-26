@@ -27,5 +27,10 @@ export const BRAND_CONFIG = {
     aossieWebsite: 'https://aossie.org/',
     aossieTwitter: 'https://x.com/aossie_org',
     aossieLinkedIn: 'https://www.linkedin.com/company/aossie/',
+    aossieGithub: 'https://github.com/AOSSIE-Org',
+    aossieDiscord: 'https://discord.com/invite/hjUhu33uAn',
+    aossieYouTube: 'https://www.youtube.com/@AOSSIE-Org',
+    aossieEmail: 'mailto:aossie.oss@gmail.com',
+    aossieSponsors: 'https://github.com/sponsors/AOSSIE-Org',
   },
 } as const;
