@@ -16,6 +16,11 @@ const FOOTER_LINKS = [
     isExternal: true,
   },
   {
+    label: 'LinkedIn',
+    href: BRAND_CONFIG.urls.aossieLinkedIn,
+    isExternal: true,
+  },
+  {
     label: 'Support Us',
     href: BRAND_CONFIG.urls.aossieSponsors,
     isExternal: true,
