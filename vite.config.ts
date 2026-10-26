@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // Relative base allows seamless deployment to GitHub Pages subpath or root domains
-  base: process.env.BASE_URL || './',
+  // GitHub Pages deployment base path
+  base: '/Gitcord-LandingPage/',
   build: {
     cssCodeSplit: true,
     rollupOptions: {

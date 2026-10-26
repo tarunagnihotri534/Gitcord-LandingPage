@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Heart } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { GithubIcon, DiscordIcon, LinkedinIcon, XIcon, YoutubeIcon } from '../common/Icons';
 import { BRAND_CONFIG } from '../../data/brand';
 import { useSmoothScroll } from '../../context/useSmoothScroll';
@@ -122,7 +122,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* MIDDLE SECTION: Navigation & Social Links */}
-          <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+          <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8 shrink-0">
             {/* Desktop vertical separator */}
             <div
               className="hidden lg:block h-20 w-px bg-gitcord-border shrink-0"
@@ -133,7 +133,7 @@ export const Footer: React.FC = () => {
               {/* Navigation */}
               <nav
                 aria-label="Footer Navigation"
-                className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+                className="flex items-center justify-center gap-x-5 sm:gap-x-6 gap-y-2 flex-wrap sm:flex-nowrap whitespace-nowrap"
               >
                 {FOOTER_LINKS.map((item) => (
                   <a
@@ -141,7 +141,7 @@ export const Footer: React.FC = () => {
                     href={item.href}
                     target={item.isExternal ? '_blank' : undefined}
                     rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                    className="text-sm font-medium text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150"
+                    className="text-sm font-medium text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150 whitespace-nowrap"
                   >
                     {item.label}
                   </a>
@@ -210,27 +210,6 @@ export const Footer: React.FC = () => {
               {/* Tagline */}
               <p className="text-xs uppercase tracking-[0.2em] text-gitcord-muted font-medium">
                 BUILT FOR OPEN SOURCE COMMUNITIES
-              </p>
-
-              {/* Made with love by AOSSIE */}
-              <p className="flex items-center justify-center lg:justify-end gap-1.5 text-sm font-normal text-gitcord-muted">
-                <span>Made with</span>
-                <Heart
-                  className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400 inline"
-                  aria-label="love"
-                />
-                <span>
-                  by{' '}
-                  <a
-                    href="https://github.com/AOSSIE-Org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="AOSSIE GitHub link"
-                    className="font-semibold text-gitcord-heading hover:text-gitcord-blurple underline underline-offset-2 transition-colors"
-                  >
-                    AOSSIE
-                  </a>
-                </span>
               </p>
             </div>
           </div>
