@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ExternalLink, GitPullRequest, Shield, CheckCircle2, ChevronRight } from 'lucide-react';
+import { ArrowRight, ExternalLink, GitPullRequest, ChevronRight } from 'lucide-react';
 import { BRAND_CONFIG } from '../../data/brand';
 import { GithubIcon, DiscordIcon } from '../common/Icons';
 import { useSmoothScroll } from '../../context/useSmoothScroll';
@@ -13,32 +13,6 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Left Column: Clean Factual Text */}
           <div className="lg:col-span-7 space-y-6">
-            {/* Meta tags */}
-            <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
-              <a
-                href={BRAND_CONFIG.urls.aossieWebsite}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-gitcord-surface border border-gitcord-border text-gitcord-text font-medium hover:border-gitcord-muted hover:text-gitcord-heading transition-colors"
-                title="AOSSIE — Australian Open Source Software Innovation and Education"
-              >
-                <picture>
-                  <source srcSet={`${import.meta.env.BASE_URL}AOSSIE-Logo.webp`} type="image/webp" />
-                  <img
-                    src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
-                    alt="AOSSIE Logo"
-                    className="h-4 w-4 object-contain"
-                    width={16}
-                    height={16}
-                    fetchPriority="high"
-                  />
-                </picture>
-                <span>{BRAND_CONFIG.org}</span>
-              </a>
-              <span className="text-gitcord-muted">/</span>
-              <span className="text-gitcord-muted font-medium">Discord &amp; GitHub Automation Engine</span>
-            </div>
-
             {/* Headline */}
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-gitcord-heading leading-tight">
               Deterministic automation for open-source communities.
@@ -74,26 +48,6 @@ export const Hero: React.FC = () => {
                 <span>View on GitHub</span>
                 <ExternalLink className="w-3.5 h-3.5 text-gitcord-muted" aria-hidden="true" />
               </a>
-            </div>
-
-            {/* Specification Checklist */}
-            <div className="pt-4 border-t border-gitcord-border flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono text-gitcord-muted">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-gitcord-green" aria-hidden="true" />
-                <span>Python 3.11+</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-gitcord-green" aria-hidden="true" />
-                <span>SQLite local state</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-gitcord-green" aria-hidden="true" />
-                <span>Audit-first Markdown reports</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-gitcord-blurple" aria-hidden="true" />
-                <span>GNU GPL-3.0</span>
-              </span>
             </div>
           </div>
 

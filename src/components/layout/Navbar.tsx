@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ExternalLink, Sun, Moon } from 'lucide-react';
-import { GithubIcon } from '../common/Icons';
+import { GithubIcon, LinkedinIcon } from '../common/Icons';
 import { NAV_LINKS, BRAND_CONFIG } from '../../data/brand';
 import { useSmoothScroll } from '../../context/useSmoothScroll';
 import { useTheme } from '../../context/useTheme';
@@ -68,30 +68,6 @@ export const Navbar: React.FC = () => {
               <span className="text-base font-semibold tracking-tight text-gitcord-heading">
                 Gitcord
               </span>
-              <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-gitcord-surface text-gitcord-muted border border-gitcord-border">
-                v1.0
-              </span>
-            </a>
-
-            {/* AOSSIE Parent Org Badge */}
-            <a
-              href={BRAND_CONFIG.urls.aossieWebsite}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-gitcord-surface border border-gitcord-border text-xs text-gitcord-muted hover:text-gitcord-heading transition-colors"
-              title="AOSSIE — Australian Open Source Software Innovation and Education"
-            >
-              <picture>
-                <source srcSet={`${import.meta.env.BASE_URL}AOSSIE-Logo.webp`} type="image/webp" />
-                <img
-                  src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
-                  alt="AOSSIE Logo"
-                  className="h-4 w-4 object-contain"
-                  width={16}
-                  height={16}
-                />
-              </picture>
-              <span className="font-mono text-[11px] text-gitcord-text font-medium">AOSSIE</span>
             </a>
           </div>
 
@@ -148,6 +124,20 @@ export const Navbar: React.FC = () => {
                 <Moon className="w-3.5 h-3.5" aria-hidden="true" />
               </button>
             </div>
+
+            {/* LinkedIn Link (Desktop) */}
+            <a
+              href={BRAND_CONFIG.urls.aossieLinkedIn}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-gitcord-text bg-gitcord-surface hover:bg-gitcord-surface-elev border border-gitcord-border hover:border-gitcord-border transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-gitcord-blurple"
+              title="AOSSIE on LinkedIn"
+              aria-label="AOSSIE on LinkedIn"
+            >
+              <LinkedinIcon className="w-3.5 h-3.5 text-gitcord-text" aria-hidden="true" />
+              <span>LinkedIn</span>
+              <ExternalLink className="w-3 h-3 text-gitcord-muted" aria-hidden="true" />
+            </a>
 
             {/* GitHub Link (Desktop) */}
             <a
