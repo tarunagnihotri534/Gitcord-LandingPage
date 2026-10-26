@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ExternalLink, Sun, Moon } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../common/Icons';
+import { GithubIcon } from '../common/Icons';
 import { NAV_LINKS, BRAND_CONFIG } from '../../data/brand';
 import { useSmoothScroll } from '../../context/useSmoothScroll';
 import { useTheme } from '../../context/useTheme';
@@ -124,20 +124,6 @@ export const Navbar: React.FC = () => {
                 <Moon className="w-3.5 h-3.5" aria-hidden="true" />
               </button>
             </div>
-
-            {/* LinkedIn Link (Desktop) */}
-            <a
-              href={BRAND_CONFIG.urls.aossieLinkedIn}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-gitcord-text bg-gitcord-surface hover:bg-gitcord-surface-elev border border-gitcord-border hover:border-gitcord-border transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-gitcord-blurple"
-              title="AOSSIE on LinkedIn"
-              aria-label="AOSSIE on LinkedIn"
-            >
-              <LinkedinIcon className="w-3.5 h-3.5 text-gitcord-text" aria-hidden="true" />
-              <span>LinkedIn</span>
-              <ExternalLink className="w-3 h-3 text-gitcord-muted" aria-hidden="true" />
-            </a>
 
             {/* GitHub Link (Desktop) */}
             <a
