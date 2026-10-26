@@ -1,222 +1,239 @@
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
-import { GithubIcon, DiscordIcon } from '../common/Icons';
-import { BRAND_CONFIG, NAV_LINKS } from '../../data/brand';
+import { Mail, Heart } from 'lucide-react';
+import { GithubIcon, DiscordIcon, LinkedinIcon, XIcon, YoutubeIcon } from '../common/Icons';
+import { BRAND_CONFIG } from '../../data/brand';
 import { useSmoothScroll } from '../../context/useSmoothScroll';
+
+const FOOTER_LINKS = [
+  {
+    label: 'Documentation',
+    href: BRAND_CONFIG.urls.installation,
+    isExternal: true,
+  },
+  {
+    label: 'GitHub Repo',
+    href: BRAND_CONFIG.urls.github,
+    isExternal: true,
+  },
+  {
+    label: 'Support Us',
+    href: BRAND_CONFIG.urls.aossieSponsors,
+    isExternal: true,
+  },
+] as const;
+
+const SOCIAL_LINKS = [
+  {
+    label: 'Email',
+    href: BRAND_CONFIG.urls.aossieEmail,
+    icon: Mail,
+    isExternal: false,
+  },
+  {
+    label: 'GitHub',
+    href: BRAND_CONFIG.urls.aossieGithub,
+    icon: GithubIcon,
+    isExternal: true,
+  },
+  {
+    label: 'Discord',
+    href: BRAND_CONFIG.urls.aossieDiscord,
+    icon: DiscordIcon,
+    isExternal: true,
+  },
+  {
+    label: 'LinkedIn',
+    href: BRAND_CONFIG.urls.aossieLinkedIn,
+    icon: LinkedinIcon,
+    isExternal: true,
+  },
+  {
+    label: 'X',
+    href: BRAND_CONFIG.urls.aossieTwitter,
+    icon: XIcon,
+    isExternal: true,
+  },
+  {
+    label: 'YouTube',
+    href: BRAND_CONFIG.urls.aossieYouTube,
+    icon: YoutubeIcon,
+    isExternal: true,
+  },
+] as const;
 
 export const Footer: React.FC = () => {
   const { scrollTo } = useSmoothScroll();
 
   return (
-    <footer className="bg-gitcord-surface border-t border-gitcord-border mt-24 py-12 transition-colors duration-200" aria-labelledby="footer-heading">
+    <footer
+      className="site-footer w-full bg-gitcord-surface border-t border-gitcord-border mt-24 py-8 md:py-10 transition-colors duration-200"
+      aria-labelledby="footer-heading"
+    >
       <h2 id="footer-heading" className="sr-only">Footer</h2>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-gitcord-border text-sm">
-          {/* Col 1: About */}
-          <div className="space-y-3 md:col-span-1">
-            <div className="flex items-center gap-2.5">
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-6">
+          {/* LEFT SECTION: AOSSIE Brand & Mission */}
+          <div className="flex items-center gap-6 sm:gap-8 justify-center lg:justify-start max-w-md w-full lg:w-auto">
+            {/* AOSSIE Logo */}
+            <a
+              href={BRAND_CONFIG.urls.aossieWebsite}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 hover:opacity-90 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-gitcord-blurple rounded"
+              aria-label="Visit AOSSIE organization website"
+            >
               <picture>
-                <source srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`} type="image/webp" />
+                <source srcSet={`${import.meta.env.BASE_URL}aossie_logo.svg`} type="image/svg+xml" />
+                <source srcSet={`${import.meta.env.BASE_URL}AOSSIE-Logo.webp`} type="image/webp" />
                 <img
-                  src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
-                  alt="Gitcord Logomark"
-                  className="h-6 w-6 object-contain"
-                  width={24}
-                  height={24}
+                  src={`${import.meta.env.BASE_URL}aossie_logo.svg`}
+                  alt="AOSSIE"
+                  className="h-16 w-auto object-contain"
+                  width={64}
+                  height={64}
                   loading="lazy"
                 />
               </picture>
-              <span className="font-semibold text-gitcord-heading">Gitcord</span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-gitcord-surface-elev border border-gitcord-border text-gitcord-muted">
-                v1.0
-              </span>
-            </div>
-            <p className="text-xs text-gitcord-muted leading-relaxed max-w-xs">
-              Local-first, offline-first automation engine connecting Discord communities with GitHub repositories.
+            </a>
+
+            {/* Separator */}
+            <div
+              className="h-20 w-px bg-gitcord-border shrink-0 hidden sm:block"
+              aria-hidden="true"
+            />
+
+            {/* Description */}
+            <p className="text-xs sm:text-sm text-gitcord-muted leading-relaxed text-center sm:text-left">
+              AOSSIE is a non-profit organization dedicated to building impactful open-source software, mentoring contributors, and fostering innovation through global collaboration.
             </p>
-            <div className="pt-1">
-              <a
-                href={BRAND_CONFIG.urls.aossieWebsite}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-2.5 py-1.5 rounded-md border border-gitcord-border bg-gitcord-surface-elev hover:border-gitcord-muted transition-colors group"
-              >
-                <picture>
-                  <source srcSet={`${import.meta.env.BASE_URL}AOSSIE-Logo.webp`} type="image/webp" />
-                  <img
-                    src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
-                    alt="AOSSIE Logo"
-                    className="h-6 w-6 object-contain"
-                    width={24}
-                    height={24}
-                    loading="lazy"
-                  />
-                </picture>
-                <div className="text-[11px] leading-tight">
-                  <span className="text-gitcord-muted block text-[10px]">Open source project by</span>
-                  <span className="text-gitcord-heading font-medium group-hover:text-gitcord-blurple transition-colors">AOSSIE</span>
-                </div>
-              </a>
+          </div>
+
+          {/* MIDDLE SECTION: Navigation & Social Links */}
+          <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+            {/* Desktop vertical separator */}
+            <div
+              className="hidden lg:block h-20 w-px bg-gitcord-border shrink-0"
+              aria-hidden="true"
+            />
+
+            <div className="flex flex-col items-center gap-5">
+              {/* Navigation */}
+              <nav aria-label="Footer Navigation" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+                {FOOTER_LINKS.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target={item.isExternal ? '_blank' : undefined}
+                    rel={item.isExternal ? 'noopener noreferrer' : undefined}
+                    className="text-sm font-medium text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+
+              {/* Social Links */}
+              <div className="flex items-center justify-center gap-5 sm:gap-6 text-gitcord-muted">
+                {SOCIAL_LINKS.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target={item.isExternal ? '_blank' : undefined}
+                      rel={item.isExternal ? 'noopener noreferrer' : undefined}
+                      aria-label={`Visit our ${item.label}`}
+                      title={item.label}
+                      className="text-gitcord-muted hover:text-gitcord-heading transition-all duration-150 transform hover:scale-110 p-1"
+                    >
+                      <Icon className="w-4 h-4" size={18} />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
-          {/* Col 2: Navigation */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gitcord-heading mb-3">
-              On this page
-            </h3>
-            <ul className="space-y-2 text-xs">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollTo(link.href, { offset: -70 });
-                    }}
-                    className="text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* RIGHT SECTION: Meta, Copyright & Made by AOSSIE */}
+          <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+            {/* Desktop vertical separator */}
+            <div
+              className="hidden lg:block h-20 w-px bg-gitcord-border shrink-0"
+              aria-hidden="true"
+            />
 
-          {/* Col 3: Documentation */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gitcord-heading mb-3">
-              Documentation
-            </h3>
-            <ul className="space-y-2 text-xs">
-              <li>
+            <div className="flex flex-col gap-2 items-center text-center lg:items-end lg:text-right">
+              {/* Year & Gitcord Logo */}
+              <p className="flex items-center justify-center lg:justify-end text-xs tracking-[0.2em] font-medium text-gitcord-heading">
+                <span>© {new Date().getFullYear()}</span>
                 <a
-                  href={BRAND_CONFIG.urls.installation}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150 inline-flex items-center gap-1"
-                >
-                  <span>Installation Guide</span>
-                  <ExternalLink className="w-2.5 h-2.5" aria-hidden="true" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={BRAND_CONFIG.urls.dockerGuide}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150 inline-flex items-center gap-1"
-                >
-                  <span>Docker Deployment</span>
-                  <ExternalLink className="w-2.5 h-2.5" aria-hidden="true" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={BRAND_CONFIG.urls.contributing}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150 inline-flex items-center gap-1"
-                >
-                  <span>Contributing</span>
-                  <ExternalLink className="w-2.5 h-2.5" aria-hidden="true" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={BRAND_CONFIG.urls.license}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150 inline-flex items-center gap-1"
-                >
-                  <span>License (GPL-3.0)</span>
-                  <ExternalLink className="w-2.5 h-2.5" aria-hidden="true" />
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 4: Community */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gitcord-heading mb-3">
-              Repository &amp; Community
-            </h3>
-            <ul className="space-y-2 text-xs">
-              <li>
-                <a
-                  href={BRAND_CONFIG.urls.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150 inline-flex items-center gap-1.5"
-                >
-                  <GithubIcon className="w-3.5 h-3.5 text-gitcord-heading" aria-hidden="true" />
-                  <span>GitHub Repository</span>
-                  <ExternalLink className="w-2.5 h-2.5" aria-hidden="true" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={BRAND_CONFIG.urls.discordThread}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150 inline-flex items-center gap-1.5"
-                >
-                  <DiscordIcon className="w-3.5 h-3.5 text-gitcord-blurple" aria-hidden="true" />
-                  <span>Discord Project Thread</span>
-                  <ExternalLink className="w-2.5 h-2.5" aria-hidden="true" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={BRAND_CONFIG.urls.aossieWebsite}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gitcord-muted hover:text-gitcord-heading transition-colors duration-150 inline-flex items-center gap-1.5"
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo(document.body, { offset: 0 });
+                  }}
+                  aria-label="Go to top of page"
+                  className="inline-flex items-center gap-1.5 ml-2 hover:opacity-80 transition-opacity"
                 >
                   <picture>
-                    <source srcSet={`${import.meta.env.BASE_URL}AOSSIE-Logo.webp`} type="image/webp" />
+                    <source srcSet={`${import.meta.env.BASE_URL}gitcord-logo.webp`} type="image/webp" />
                     <img
-                      src={`${import.meta.env.BASE_URL}AOSSIE%20Logo.png`}
-                      alt=""
-                      className="h-4 w-4 object-contain inline-block"
-                      width={16}
-                      height={16}
-                      loading="lazy"
-                      aria-hidden="true"
+                      src={`${import.meta.env.BASE_URL}GITCORD%20Logo.png`}
+                      alt="Gitcord Logo"
+                      className="h-6 w-6 object-contain cursor-pointer"
+                      width={24}
+                      height={24}
                     />
                   </picture>
-                  <span>AOSSIE Organisation</span>
-                  <ExternalLink className="w-2.5 h-2.5" aria-hidden="true" />
                 </a>
-              </li>
-            </ul>
+              </p>
+
+              {/* Tagline */}
+              <p className="text-xs uppercase tracking-[0.2em] text-gitcord-muted font-medium">
+                BUILT FOR OPEN SOURCE COMMUNITIES
+              </p>
+
+              {/* Made with love by AOSSIE */}
+              <p className="flex items-center justify-center lg:justify-end gap-1.5 text-sm font-normal text-gitcord-muted">
+                <span>Made with</span>
+                <Heart className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400 inline" aria-label="love" />
+                <span>
+                  by{' '}
+                  <a
+                    href="https://github.com/AOSSIE-Org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="AOSSIE GitHub link"
+                    className="font-semibold text-gitcord-heading hover:text-gitcord-blurple underline underline-offset-2 transition-colors"
+                  >
+                    AOSSIE
+                  </a>
+                </span>
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Metadata */}
-        <div className="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-gitcord-muted">
-          <div>
-            <span>Licensed under the GNU General Public License v3.0 (GPL-3.0).</span>
-            <span className="block text-[11px] text-gitcord-muted pt-0.5">
-              Unofficial preview, pending maintainer review.
-            </span>
-          </div>
+        {/* Subtle Legal & License Note */}
+        <div className="mt-8 pt-4 border-t border-gitcord-border/50 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gitcord-muted">
+          <span>Licensed under GNU General Public License v3.0 (GPL-3.0).</span>
           <div className="flex items-center gap-4">
             <a
               href={BRAND_CONFIG.urls.contributing}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gitcord-muted hover:text-gitcord-heading underline underline-offset-2 transition-colors"
+              className="hover:text-gitcord-heading underline underline-offset-2 transition-colors"
             >
               Contributing Guidelines
             </a>
             <a
-              href={BRAND_CONFIG.urls.github}
+              href={BRAND_CONFIG.urls.license}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gitcord-muted hover:text-gitcord-heading underline underline-offset-2 transition-colors"
+              className="hover:text-gitcord-heading underline underline-offset-2 transition-colors"
             >
-              GitHub
+              License (GPL-3.0)
             </a>
           </div>
         </div>
