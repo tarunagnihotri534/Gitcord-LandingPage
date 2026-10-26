@@ -6,6 +6,7 @@ export interface NavLink {
 export const NAV_LINKS: readonly NavLink[] = [
   { label: 'How It Works', href: '#how-it-works' },
   { label: 'Linking', href: '#linking' },
+  { label: 'In Action', href: '#showcase' },
   { label: 'Features', href: '#features' },
   { label: 'Quick Start', href: '#quickstart' },
 ] as const;

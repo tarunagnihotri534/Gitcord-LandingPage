@@ -13,6 +13,9 @@ const PipelineSection = React.lazy(() =>
 const LinkingSection = React.lazy(() =>
   import('./components/sections/LinkingSection').then((m) => ({ default: m.LinkingSection }))
 );
+const ShowcaseSection = React.lazy(() =>
+  import('./components/sections/ShowcaseSection').then((m) => ({ default: m.ShowcaseSection }))
+);
 const FeaturesSection = React.lazy(() =>
   import('./components/sections/FeaturesSection').then((m) => ({ default: m.FeaturesSection }))
 );
@@ -35,6 +38,9 @@ export default function App(): React.JSX.Element {
             </Suspense>
             <Suspense fallback={<div className="py-16 min-h-[500px] border-b border-gitcord-border" aria-hidden="true" />}>
               <LinkingSection />
+            </Suspense>
+            <Suspense fallback={<div className="py-20 min-h-[500px] border-b border-gitcord-border" aria-hidden="true" />}>
+              <ShowcaseSection />
             </Suspense>
             <Suspense fallback={<div className="py-16 min-h-[400px] border-b border-gitcord-border" aria-hidden="true" />}>
               <FeaturesSection />
